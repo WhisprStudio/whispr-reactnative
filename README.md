@@ -1,2 +1,2 @@
 # whispr-react-app
-Remote control for whisper speaker
+Remote control for whispr speaker
