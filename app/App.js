@@ -1,14 +1,26 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native';
 import SelectSpeaker from './src/pages/selectSpeaker/SelectSpeaker';
 import CustomSlider from './src/components/CustomSlider';
+import Toast from 'react-native-toast-message';
+import ConfigItem from "./src/components/ConfigItem.js";
+import AddConfigItem from "./src/components/AddConfigItem.js";
 
 export default function App() {
   return (
       <View style={styles.container}>
+      <Toast ref={(ref) => Toast.setRef(ref)} />
+      <ImageBackground style={{width: "100%", height: "100%",}} source={require('./assets/bg.png')} resizeMode="cover">
         <SelectSpeaker />
         <CustomSlider title="Volume" />
         <CustomSlider title="Noise Canceling" />
+        <ScrollView>
+        <ConfigItem title={"work config"} status={0}/>
+        <ConfigItem title={"outdoor config"} status={1}/>
+        <ConfigItem title={"music config"} status={0}/>
+        <AddConfigItem />
+        </ScrollView>
+      </ImageBackground>
       </View>
   );
 }

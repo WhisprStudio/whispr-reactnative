@@ -14,7 +14,7 @@ export default function Panel(props) {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
   });
-  const [isPanelActive, setIsPanelActive] = useState(true);
+  const [isPanelActive, setIsPanelActive] = useState(false);
 
   const openPanel = () => {
     setIsPanelActive(true);
