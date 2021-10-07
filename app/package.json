@@ -22,7 +22,8 @@
     "react-native-swipeable-row": "^0.8.1",
     "react-native-toast-message": "^1.6.0",
     "react-router-native": "^5.2.1",
-    "rn-swipeable-panel": "^1.2.6"
+    "rn-swipeable-panel": "^1.2.6",
+    "swiper": "^7.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

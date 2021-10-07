@@ -7,23 +7,21 @@ import { SwipeablePanel } from 'rn-swipeable-panel';
 import { useState } from 'react';
 
 export default function Panel(props) {
+  const [isPanelActive, setIsPanelActive] = useState(true);
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     openLarge: false,
+    noBackgroundOpacity: true,
+    allowTouchOutside: false,
     showCloseButton: false,
-    onClose: () => closePanel(),
-    onPressCloseButton: () => closePanel(),
+    onClose: () => setIsPanelActive(true),
   });
-  const [isPanelActive, setIsPanelActive] = useState(false);
 
   const openPanel = () => {
     setIsPanelActive(true);
   };
 
-  const closePanel = () => {
-    setIsPanelActive(false);
-  };
-    return (
+  return (
         <SwipeablePanel {...panelProps} style={styles.panel} isActive={isPanelActive}>
             <View style={styles.panelContainer}>
             <View>

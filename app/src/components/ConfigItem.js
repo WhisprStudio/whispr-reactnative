@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity, Modal} from 'react-native';
 import EditConfig from "../../assets/svg/EditConfig.js";
 import CloseIcon from "../../assets/svg/CloseIcon.js";
 import EditConfigModal from "./EditConfigModal.js";
-import Swipeable from 'react-native-swipeable-row';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default function ConfigItem(props) {
 
@@ -19,8 +19,7 @@ export default function ConfigItem(props) {
 
     const [editModal, setEditModal] = useState(false);
 
-    return (
-    <Swipeable>
+    return (<GestureRecognizer onSwipeRight={(state) => setStatusState(!statusState)}>
     <View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
     <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
@@ -41,8 +40,7 @@ export default function ConfigItem(props) {
         </View>
     </View>
         <View style={styles.line}></View>
-    </View>
-    </Swipeable>);
+    </View></GestureRecognizer>);
 }
 
 const styles = {
