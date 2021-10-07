@@ -4,24 +4,24 @@ import { Text, View, TouchableOpacity, Modal} from 'react-native';
 import EditConfig from "../../assets/svg/EditConfig.js";
 import CloseIcon from "../../assets/svg/CloseIcon.js";
 import EditConfigModal from "./EditConfigModal.js";
+import Swipeable from 'react-native-swipeable-row';
 
 export default function ConfigItem(props) {
 
     var status = <View />;
-    switch (props.status) {
-        case 0:
+    const [statusState, setStatusState] = useState(false);
+
+    if (statusState === false) {
             status = <Text style={styles.statusFailed}> unactive</Text>;
-            break;
-        case 1:
+    } else if (statusState === true) {
             status = <Text style={styles.statusSuccess}> active</Text>;
-            break;
-        default:
-            break;
     }
 
     const [editModal, setEditModal] = useState(false);
 
-    return (<View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
+    return (
+    <Swipeable>
+    <View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
     <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
         <View>
@@ -41,7 +41,8 @@ export default function ConfigItem(props) {
         </View>
     </View>
         <View style={styles.line}></View>
-    </View>);
+    </View>
+    </Swipeable>);
 }
 
 const styles = {

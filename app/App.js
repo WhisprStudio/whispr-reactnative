@@ -15,9 +15,9 @@ export default function App() {
         <CustomSlider title="Volume" />
         <CustomSlider title="Noise Canceling" />
         <ScrollView>
-        <ConfigItem title={"work config"} status={0}/>
-        <ConfigItem title={"outdoor config"} status={1}/>
-        <ConfigItem title={"music config"} status={0}/>
+        <ConfigItem title={"work config"} status={false}/>
+        <ConfigItem title={"outdoor config"} status={true}/>
+        <ConfigItem title={"music config"} status={false}/>
         <AddConfigItem />
         </ScrollView>
       </ImageBackground>
