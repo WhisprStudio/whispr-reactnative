@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState } from 'react';
+import {theme} from '@theme';
 import { Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
 import CustomSlider from './CustomSlider';
 
@@ -21,10 +22,10 @@ export default function EditConfigModal(props) {
                 </View>
                 <View style={{widht: "100%", flexDirection: "row",}}>
                     <TouchableOpacity style={{marginRight: 5}} onPress={() => {props.setEditModal(false)}}>
-                      <Text style={{fontFamily: "Cubano", fontSize: 25, color: "#fff", marginTop: 30, backgroundColor: "#FFD500", borderRadius: 15, paddingTop: 5, paddingBottom: 5, paddingLeft: 20, paddingRight: 20}}>SAVE</Text>
+                      <Text style={{fontFamily: theme.fonts.primary.normal, fontSize: 25, color: "#fff", marginTop: 30, backgroundColor: "#FFD500", borderRadius: 15, paddingTop: 5, paddingBottom: 5, paddingLeft: 20, paddingRight: 20}}>SAVE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 5}} onPress={() => {props.setEditModal(false)}}>
-                      <Text style={{fontFamily: "Cubano", fontSize: 25, color: "#fff", marginTop: 30, backgroundColor: "#E55B5B", borderRadius: 15, paddingTop: 5, paddingBottom: 5, paddingLeft: 20, paddingRight: 20}}>CANCEL</Text>
+                      <Text style={{fontFamily: theme.fonts.primary.normal, fontSize: 25, color: "#fff", marginTop: 30, backgroundColor: "#E55B5B", borderRadius: 15, paddingTop: 5, paddingBottom: 5, paddingLeft: 20, paddingRight: 20}}>CANCEL</Text>
                     </TouchableOpacity>
                 </View>
           </View>
@@ -35,7 +36,7 @@ export default function EditConfigModal(props) {
 const styles = {
     title: {
         marginTop: "15%",
-        fontFamily: "Cubano",
+        fontFamily: theme.fonts.primary.normal,
         fontSize: 27,
         color: "#fff",
     },
@@ -44,7 +45,7 @@ const styles = {
        borderBottomColor: '#AFAFAF',
        borderBottomWidth: 1,
        width: "60%",
-       fontFamily: "Cubano",
+       fontFamily: theme.fonts.primary.normal,
        fontSize: 25, color: "#fff",
        marginTop: 30,
        marginLeft: 15

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View, Text, Image, StyleSheet } from "react-native";
-import Card from '../../components/Card.js'
-import Jauge from '../../components/Jauge.js';
-import StatusLight from "../../components/StatusLight.js";
+import Card from '@components/Card.js'
+import Jauge from '@components/Jauge.js';
+import StatusLight from "@components/StatusLight.js";
 import { SwipeablePanel } from 'rn-swipeable-panel';
 import { useState } from 'react';
 

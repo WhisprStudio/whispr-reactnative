@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from 'react';
-import { Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
+import { Text, View, TouchableOpacity, Modal} from 'react-native';
+import {theme} from "@theme/index";
 import AddConfig from "../../assets/svg/AddConfig.js";
 import EditConfigModal from "./EditConfigModal.js";
 
@@ -28,13 +29,13 @@ const styles = {
     line: {
        marginTop: 10,
        marginBottom: 10,
-       borderBottomColor: '#AFAFAF',
+       borderBottomColor: theme.colors.gray,
        borderBottomWidth: 1,
     },
     titleAddConfig: {
         marginLeft: 10,
         fontSize: 17,
-        fontFamily: "Barlow-SemiBoldItalic",
-        color: "#AFAFAF",
+        fontFamily: theme.fonts.secondary.semiBoldItalic,
+        color: theme.colors.gray,
     },
 };

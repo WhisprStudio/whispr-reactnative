@@ -5,6 +5,7 @@ import EditConfig from "../../assets/svg/EditConfig.js";
 import CloseIcon from "../../assets/svg/CloseIcon.js";
 import EditConfigModal from "./EditConfigModal.js";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import {theme} from "@theme";
 
 export default function ConfigItem(props) {
 
@@ -47,29 +48,29 @@ const styles = {
     line: {
        marginTop: 10,
        marginBottom: 10,
-       borderBottomColor: '#AFAFAF',
+       borderBottomColor: theme.colors.gray,
        borderBottomWidth: 1,
     },
     textConfig: {
         marginLeft: 10,
         fontSize: 17,
-        fontFamily: "Barlow-SemiBold",
-        color: "#AFAFAF",
+        fontFamily: theme.fonts.secondary.semiBold,
+        color: theme.colors.gray,
     },
     subtextConfig: {
                 fontSize: 15,
-                fontFamily: "Barlow-ThinItalic",
-                color: "#AFAFAF",
+                fontFamily: theme.fonts.secondary.thinItalic,
+                color: theme.colors.gray,
     },
     statusFailed: {
                 fontSize: 15,
-                fontFamily: "Barlow-ThinItalic",
-                color: "#E55B5B",
+                fontFamily: theme.fonts.secondary.thinItalic,
+                color: theme.colors.lightRed
     },
     statusSuccess: {
                 fontSize: 15,
-                fontFamily: "Barlow-ThinItalic",
-                color: "#FFD500",
+                fontFamily: theme.fonts.secondary.thinItalic,
+                color: theme.colors.yellow,
     },
 
 };
