@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {Text, View, ScrollView, Image } from 'react-native';
-import Panel from "../panel/Panel.js";
+import Panel from "../../pages/Panel/Panel.js";
 import CustomSlider from '@components/CustomSlider';
 import ConfigItem from "@components/ConfigItem.js";
 import AddConfigItem from "@components/AddConfigItem.js";
 
-export default function Home() {
+export const Home = ({navigation}) => {
   return (
+  <>
   <View style={{height: "100%"}}>
        <Image style={{marginTop: "5%", marginLeft: "5%", marginBottom: "10%", width: 100, height: 50}} source={require('../../../assets/logo.png')}/>
       <CustomSlider title="Volume" />
@@ -18,6 +19,8 @@ export default function Home() {
       <AddConfigItem />
       </ScrollView>
   </View>
-
+  <Panel source={require('../../../assets/portable.png')} speakerName={"Speaker Name"} />
+  {/* <Panel */}
+  </>
   );
 }
