@@ -35,6 +35,7 @@
 		61258B66819948E4AC89F6B9 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24A44CD77A964DB6B7E42142 /* Barlow-Thin.ttf */; };
 		89FB84937B5A467A8B47E918 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F5BEAF6E4640CF912C6D3D /* Barlow-ThinItalic.ttf */; };
 		8C69B3CC5E7B4BED99CC7E83 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D7623E7FBC984E2BBC3440D9 /* bg.png */; };
+		AD56081EB9AF47E7A7717795 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E6C62B2A226D4060BD00FF79 /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		24A44CD77A964DB6B7E42142 /* Barlow-Thin.ttf */ = {isa = PBXFileReference; name = "Barlow-Thin.ttf"; path = "../assets/Barlow-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F4F5BEAF6E4640CF912C6D3D /* Barlow-ThinItalic.ttf */ = {isa = PBXFileReference; name = "Barlow-ThinItalic.ttf"; path = "../assets/Barlow-ThinItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D7623E7FBC984E2BBC3440D9 /* bg.png */ = {isa = PBXFileReference; name = "bg.png"; path = "../assets/bg.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E6C62B2A226D4060BD00FF79 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../assets/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				24A44CD77A964DB6B7E42142 /* Barlow-Thin.ttf */,
 				F4F5BEAF6E4640CF912C6D3D /* Barlow-ThinItalic.ttf */,
 				D7623E7FBC984E2BBC3440D9 /* bg.png */,
+				E6C62B2A226D4060BD00FF79 /* logo.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				61258B66819948E4AC89F6B9 /* Barlow-Thin.ttf in Resources */,
 				89FB84937B5A467A8B47E918 /* Barlow-ThinItalic.ttf in Resources */,
 				8C69B3CC5E7B4BED99CC7E83 /* bg.png in Resources */,
+				AD56081EB9AF47E7A7717795 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
