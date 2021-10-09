@@ -17,7 +17,6 @@ export default function Home() {
       <ConfigItem title={"music config"} status={false}/>
       <AddConfigItem />
       </ScrollView>
-      <Panel source={require('../../../assets/portable.png')} speakerName={"Speaker Name"} />
   </View>
 
   );
