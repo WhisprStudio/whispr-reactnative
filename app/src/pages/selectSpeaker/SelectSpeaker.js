@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import Card from '../../components/Card.js';
+import Card from '@components/Card.js';
 import Toast from 'react-native-toast-message';
 
 export default function SelectSpeaker() {

@@ -42,7 +42,7 @@ const styles = {
     },
     textInput: {
        color: "#fff",
-       borderBottomColor: '#AFAFAF',
+       borderBottomColor: theme.colors.gray,
        borderBottomWidth: 1,
        width: "60%",
        fontFamily: theme.fonts.primary.normal,
