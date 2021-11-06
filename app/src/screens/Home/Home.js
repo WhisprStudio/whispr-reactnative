@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Text, View, ScrollView, Image } from 'react-native';
-import Panel from "../../pages/Panel/Panel.js";
+import Panel from "../../pages/panel/Panel.js";
 import CustomSlider from '@components/CustomSlider';
 import ConfigItem from "@components/ConfigItem.js";
 import AddConfigItem from "@components/AddConfigItem.js";
@@ -20,7 +20,6 @@ export const Home = ({navigation}) => {
       </ScrollView>
   </View>
   <Panel source={require('../../../assets/portable.png')} speakerName={"Speaker Name"} />
-  {/* <Panel */}
   </>
   );
 }

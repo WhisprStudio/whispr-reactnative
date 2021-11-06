@@ -14,7 +14,7 @@ export const SelectSpeaker = () => {
           <View style={{marginBottom: 20}}>
                 <ScrollView>
                     <Card onPress={triggerErrorToast} text="Speaker Name" source={require('../../../assets/portable.png')}/>
-                    <Card text="Speaker Name" source={require('../../../assets/pro.png')}/>
+                    <Card onPress={triggerErrorToast} text="Speaker Name" source={require('../../../assets/pro.png')}/>
                     <Card text="Speaker Name" source={require('../../../assets/portable.png')}/>
                     <Card text="Speaker Name" source={require('../../../assets/pro.png')}/>
                     <Card text="Speaker Name" source={require('../../../assets/pro.png')}/>
