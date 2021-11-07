@@ -39,6 +39,7 @@ export const Bluetooth = ({route, navigation}) => {
 
     const scanAndConnect = async () => {
         const permission = requestLocationPermission();
+        console.log(device.name);
         if (!permission)
             return
         manager.startDeviceScan(null, null, (error, device) => {
@@ -53,11 +54,10 @@ export const Bluetooth = ({route, navigation}) => {
                 setDeviceID(device.id);
                 setDevice(device);
                 console.log(device.id, device.name);
-                manager.connectToDevice(device.id, {autoConnect:true}).then((device) =>
-                    {
+                manager.connectToDevice(device.id, {autoConnect:true}).then((device) => {
                        console.log(device);
-                    }
-                );
+                       device.characteristicsForDevice(deviceIdentifier, serviceUUID);
+                });
             }
         });
     };
