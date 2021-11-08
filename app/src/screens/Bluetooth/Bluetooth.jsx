@@ -1,6 +1,7 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import {View, Text, Button, PermissionsAndroid } from "react-native";
+import { BluetoothSelect } from "@components";
 import {storeData, getData} from "@components/../dataStore/UtilsData.js";
 import { BleManager } from 'react-native-ble-plx';
 
@@ -39,11 +40,11 @@ export const Bluetooth = ({route, navigation}) => {
 
     const scanAndConnect = async () => {
         const permission = requestLocationPermission();
-        console.log(device.name);
         if (!permission)
-            return
+        return
         manager.startDeviceScan(null, null, (error, device) => {
             setIsLoading(true);
+            console.log(device.name);
             if (error) {
                 alert("Error in scan=> " + error);
                 manager.stopDeviceScan();
@@ -76,7 +77,7 @@ export const Bluetooth = ({route, navigation}) => {
 
     return (
     <View>
-        <Text>Bluetooth handler page</Text>
+        {/* <Text>Bluetooth handler page</Text>
         <Button title={"blue"} onPress={scanAndConnect}/>
         {isLoading ? <Text style={{fontSize: 30}}>Looking for devices...</Text> :
             <Text style={{fontSize: 30}}>{deviceId}</Text>
@@ -86,7 +87,8 @@ export const Bluetooth = ({route, navigation}) => {
         {
         device ? device.isConnected() ? <Text style={{fontSize: 30}}>connected to {device.name}</Text>: <></> : <></>
 
-        }
+        } */}
+        <BluetoothSelect scanAndConnect={() => scanAndConnect()} device={device}/>
     </View>
     )
 }
