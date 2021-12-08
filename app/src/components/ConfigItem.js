@@ -6,8 +6,9 @@ import CloseIcon from "../../assets/svg/CloseIcon.js";
 import EditConfigModal from "./EditConfigModal.js";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import {theme} from "@theme";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ConfigItem(props) {
+export function ConfigItem(props) {
 
     var status = <Text></Text>;
     const [statusState, setStatusState] = useState(false);
@@ -35,7 +36,9 @@ export default function ConfigItem(props) {
         <TouchableOpacity style={{marginRight: 15}} onPress={() => setEditModal(true)}>
             <EditConfig />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+            AsyncStorage.removeItem(props.title);
+        }}>
               <CloseIcon />
         </TouchableOpacity>
         </View>

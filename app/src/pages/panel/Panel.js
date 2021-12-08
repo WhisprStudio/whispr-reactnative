@@ -37,7 +37,7 @@ export default function Panel(props) {
             </View>
                 <Image style={styles.imageContainer} source={props.source}></Image>
             </View>
-            <Jauge percentage={55} />
+            <Jauge percentage={props.noiseCanceling} />
         </SwipeablePanel>
     );
 }

@@ -7,7 +7,7 @@ export default function CustomSlider(props) {
   return (
   <View>
             <Text style={styles.text}>{props.title}</Text>
-            <Slider style={{height: 40, margin: 0, padding: 0}} value={40} minimumValue={0} maximumValue={100} minimumTrackTintColor={theme.colors.yellow} thumbTintColor={"#fff"}/>
+            <Slider style={{height: 40, margin: 0, padding: 0}} onValueChange={(value) => {props.setValue ? props.setValue(value): console.log("error")}} value={props.value} minimumValue={0} maximumValue={100} minimumTrackTintColor={theme.colors.yellow} thumbTintColor={"#fff"}/>
     </View>
   );
 }
