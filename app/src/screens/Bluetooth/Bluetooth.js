@@ -7,8 +7,6 @@ import {Popup} from "../../components/Popup";
 import Toast from 'react-native-toast-message';
 import {theme} from "../../theme";
 
-export const manager = new BleManager();
-
 async function requestLocationPermission() {
       const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
@@ -33,6 +31,11 @@ export const Bluetooth = ({route, navigation}) => {
     let idList = [];
 
     const [editModal, setEditModal] = useState(false);
+    let manager = null;
+
+    useEffect(() => {
+        manager = new BleManager();
+    }, [])
 
     const getServicesAndCharacteristics = (device) => {
         return new Promise((resolve, reject) => {
@@ -81,7 +84,7 @@ export const Bluetooth = ({route, navigation}) => {
                 if (idList.indexOf(device.id) === -1) {
                     idList.push(device.id)
                     array = [array, <Card id={device.id} key={`key-${device.id}`} onPress={() => {
-                            manager.stopDeviceScan();
+                        manager.stopDeviceScan();
                             setIsLoading(false);
                             manager.connectToDevice(device.id, {autoConnect:true}).then((device) => {
                                 setSelectedDevice(device)

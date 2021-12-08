@@ -9,6 +9,8 @@ import {ConfigItem} from "@components/ConfigItem.js";
 import AddConfigItem from "@components/AddConfigItem.js";
 import {storeData, getData} from "@components/../dataStore/UtilsData.js";
 import {getConfigs} from "../../dataStore/UtilsData";
+import Jauge from "../../components/Jauge";
+import StatusLight from "../../components/StatusLight";
 
 export const Home = ({route, navigation}) => {
     const { deviceName, isConnected } = route.params;
@@ -41,8 +43,63 @@ export const Home = ({route, navigation}) => {
             {configs}
         <AddConfigItem title={"CONFIG NAME"} />
         </ScrollView>
+    <View style={styles.panelContainer}>
+        <View>
+            <View style={styles.speakerNameContainer}>
+                <StatusLight color={isConnected ? "#29872F" : "#E55B5B"} />
+                <Text style={styles.connectedText}>{isConnected ? "connected to" : "not connected"}</Text>
+            </View>
+            {deviceName ? <View>
+                <Text style={styles.speakerName}>{deviceName}</Text>
+                <Button color={theme.colors.yellow} title={"DISCONNECT"} onPress={() => {navigation.navigate('Bluetooth')}} />
+            </View>: <Button color={theme.colors.yellow} title={"CONNECT"} onPress={()=> navigation.navigate('Bluetooth')}/>}
+        </View>
+        <Image style={styles.imageContainer} source={require('../../../assets/portable.png')}></Image>
     </View>
-  <Panel navigation={navigation} source={require('../../../assets/portable.png')} noiseCanceling={noiseCanceling} deviceName={deviceName} isConnected={isConnected} />
+    <Jauge percentage={noiseCanceling} />
+    </View>
+  {/*<Panel navigation={navigation} source={require('../../../assets/portable.png')} noiseCanceling={noiseCanceling} deviceName={deviceName} isConnected={isConnected} />*/}
   </>
   );
 }
+
+const styles = {
+    speakerNameContainer: {
+        flex: 1,
+        alignItems: "center",
+        flexDirection: "row",
+    },
+    panel: {
+        backgroundColor: "#353535",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 2.62,
+        elevation: 4,
+    },
+    panelContainer: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: 20,
+    },
+    imageContainer: {
+        width: 120,
+        height: 120,
+    },
+    connectedText: {
+        color: "#fff",
+        fontFamily: "Cubano",
+        fontWeight: "200",
+    },
+    speakerName: {
+        color: "#fff",
+        fontFamily: "Cubano",
+        fontWeight: "200",
+        fontSize: 25,
+    },
+};

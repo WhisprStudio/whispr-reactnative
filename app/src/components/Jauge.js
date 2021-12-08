@@ -4,12 +4,12 @@ import {View, Text} from "react-native";
 
 export default function Jauge(props) {
 
-   const size = props.percentage;
+    const size = props.percentage;
   return (
   <>
     <View style={styles.textContainer}>
         <Text style={styles.textLeft}>Noise Cancelation</Text>
-        <Text style={styles.textRight}>{props.percentage}%</Text>
+        <Text style={styles.textRight}>{parseInt(props.percentage)}%</Text>
     </View>
     <View style={{
         backgroundColor: "#B7B4A5",

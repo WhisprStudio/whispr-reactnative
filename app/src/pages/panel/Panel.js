@@ -13,7 +13,7 @@ export default function Panel(props) {
     fullWidth: true,
     openLarge: false,
     noBackgroundOpacity: true,
-    allowTouchOutside: false,
+    allowTouchOutside: true,
     showCloseButton: false,
     onClose: () => setIsPanelActive(true),
   });
@@ -37,7 +37,7 @@ export default function Panel(props) {
             </View>
                 <Image style={styles.imageContainer} source={props.source}></Image>
             </View>
-            <Jauge percentage={props.noiseCanceling} />
+                <Jauge percentage={props.noiseCanceling} />
         </SwipeablePanel>
     );
 }
@@ -57,7 +57,6 @@ const styles = {
         },
         shadowOpacity: 1,
         shadowRadius: 2.62,
-
         elevation: 4,
     },
     panelContainer: {
