@@ -1,13 +1,16 @@
 import * as React from "react";
 import { Text, View, Image, TouchableOpacity } from 'react-native';
+import {UnknownDevice} from "../icons/UnknownDevice";
 
 export default function Card(props) {
-    return (<TouchableOpacity style={styles.container} onPress={props.onPress}>
-        <View style={styles.subContainer}>
+    return (<>{ props.text ?
+            <TouchableOpacity style={styles.container} onPress={props.onPress}>
+
+            <View style={styles.subContainer}>
                 <Text style={styles.text}>{props.text}</Text>
-                <Image style={styles.imageContainer} source={props.source}></Image>
-        </View>
-    </TouchableOpacity>);
+                {props.source ? <Image style={styles.imageContainer} source={props.source}></Image> : <UnknownDevice />}
+            </View>
+    </TouchableOpacity> : <></> }</>);
 }
 
 const styles = {
@@ -31,7 +34,7 @@ const styles = {
   },
   text: {
     color: "#fff",
-    fontSize: 25,
+    fontSize: 15,
     fontFamily: "Cubano",
   },
   subContainer: {

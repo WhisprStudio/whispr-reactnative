@@ -9,7 +9,7 @@ import {theme} from "@theme";
 
 export default function ConfigItem(props) {
 
-    var status = <View />;
+    var status = <Text></Text>;
     const [statusState, setStatusState] = useState(false);
 
     if (statusState === false) {

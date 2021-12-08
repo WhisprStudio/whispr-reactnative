@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, Button } from "react-native";
 import Card from '@components/Card.js'
 import Jauge from '@components/Jauge.js';
 import StatusLight from "@components/StatusLight.js";
 import { SwipeablePanel } from 'rn-swipeable-panel';
 import { useState } from 'react';
+import {theme} from "../../theme";
 
 export default function Panel(props) {
   const [isPanelActive, setIsPanelActive] = useState(true);
@@ -26,10 +27,13 @@ export default function Panel(props) {
             <View style={styles.panelContainer}>
             <View>
                 <View style={styles.speakerNameContainer}>
-                    <StatusLight color={"#29872F"} />
-                    <Text style={styles.connectedText}>connected to </Text>
+                    <StatusLight color={props.isConnected ? "#29872F" : "#E55B5B"} />
+                    <Text style={styles.connectedText}>{props.isConnected ? "connected to" : "not connected"}</Text>
                 </View>
-                <Text style={styles.speakerName}>{props.speakerName}</Text>
+                {props.deviceName ? <View>
+                    <Text style={styles.speakerName}>{props.deviceName}</Text>
+                    <Button color={theme.colors.yellow} title={"DISCONNECT"} onPress={() => {props.navigation.navigate('Bluetooth')}} />
+                </View>: <Button color={theme.colors.yellow} title={"CONNECT"} onPress={()=> props.navigation.navigate('Bluetooth')}/>}
             </View>
                 <Image style={styles.imageContainer} source={props.source}></Image>
             </View>

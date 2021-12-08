@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import { Button } from 'react-native';
 import {theme} from '@theme';
 import { Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
 import CustomSlider from './CustomSlider';
@@ -20,13 +20,11 @@ export default function EditConfigModal(props) {
                     <CustomSlider title="Volume" />
                     <CustomSlider title="Noise Canceling" />
                 </View>
-                <View style={{widht: "100%", flexDirection: "row",}}>
-                    <TouchableOpacity style={{marginRight: 5}} onPress={() => {props.setEditModal(false)}}>
-                      <Text style={{fontFamily: theme.fonts.primary.normal, fontSize: 25, color: "#fff", marginTop: 30, backgroundColor: "#FFD500", borderRadius: 15, paddingTop: 5, paddingBottom: 5, paddingLeft: 20, paddingRight: 20}}>SAVE</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 5}} onPress={() => {props.setEditModal(false)}}>
-                      <Text style={{fontFamily: theme.fonts.primary.normal, fontSize: 25, color: "#fff", marginTop: 30, backgroundColor: "#E55B5B", borderRadius: 15, paddingTop: 5, paddingBottom: 5, paddingLeft: 20, paddingRight: 20}}>CANCEL</Text>
-                    </TouchableOpacity>
+                <View style={{flexDirection: "row"}}>
+                    <Button title={"SAVE"} color={theme.colors.yellow} style={{marginRight: 5}} onPress={() => {props.setEditModal(false)}}>
+                    </Button>
+                    <Button title={"CANCEL"} color={theme.colors.lightRed} style={{marginLeft: 5}} onPress={() => {props.setEditModal(false)}}>
+                    </Button>
                 </View>
           </View>
       </Modal>
@@ -46,7 +44,7 @@ const styles = {
        borderBottomWidth: 1,
        width: "60%",
        fontFamily: theme.fonts.primary.normal,
-       fontSize: 25, color: "#fff",
+       fontSize: 25,
        marginTop: 30,
        marginLeft: 15
     },
