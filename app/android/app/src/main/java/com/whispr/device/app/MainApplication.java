@@ -1,4 +1,4 @@
-package com.app;
+package com.whispr.device.app;
 
 import android.app.Application;
 import android.content.Context;
