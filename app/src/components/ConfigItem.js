@@ -11,12 +11,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export function ConfigItem(props) {
 
     var status = <Text></Text>;
+    let label = <Text></Text>;
     const [statusState, setStatusState] = useState(false);
 
     if (statusState === false) {
-            status = <Text style={styles.statusFailed}> unactive</Text>;
+        label = <Text style={styles.textConfig}>{props.title}</Text>;
+        status = <Text style={styles.statusUnactive}> unactive</Text>;
     } else if (statusState === true) {
-            status = <Text style={styles.statusSuccess}> active</Text>;
+        label = <Text style={styles.textConfig, styles.textActive}>{props.title}</Text>;
+        status = <Text style={styles.statusActive}> active</Text>;
     }
 
     const [editModal, setEditModal] = useState(false);
@@ -26,7 +29,7 @@ export function ConfigItem(props) {
     <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
         <View>
-            <Text style={styles.textConfig}>{props.title}</Text>
+            {label}
             <View style={{flexDirection: "row", marginLeft: 10}}>
                 <Text style={styles.subtextConfig}>status:</Text>
                 {status}
@@ -38,6 +41,7 @@ export function ConfigItem(props) {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
             AsyncStorage.removeItem(props.title);
+            props.remove(true);
         }}>
               <CloseIcon />
         </TouchableOpacity>
@@ -60,17 +64,23 @@ const styles = {
         fontFamily: theme.fonts.secondary.semiBold,
         color: theme.colors.gray,
     },
+    textActive: {
+        marginLeft: 10,
+        fontSize: 17,
+        fontFamily: theme.fonts.secondary.semiBold,
+        color: theme.colors.white,
+    },
     subtextConfig: {
                 fontSize: 15,
                 fontFamily: theme.fonts.secondary.thinItalic,
                 color: theme.colors.gray,
     },
-    statusFailed: {
+    statusUnactive: {
                 fontSize: 15,
                 fontFamily: theme.fonts.secondary.thinItalic,
                 color: theme.colors.lightRed
     },
-    statusSuccess: {
+    statusActive: {
                 fontSize: 15,
                 fontFamily: theme.fonts.secondary.thinItalic,
                 color: theme.colors.yellow,

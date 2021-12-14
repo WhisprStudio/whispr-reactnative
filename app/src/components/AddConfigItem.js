@@ -9,8 +9,10 @@ export default function AddConfigItem(props) {
 
     const [editModal, setEditModal] = useState(false);
 
+    console.log('TITLE : ', props.title)
+
     return (<View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
-    <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title}/>
+    <EditConfigModal update={props.update} editModal={editModal} setEditModal={setEditModal} title={props.title}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
         <View>
             <Text style={styles.titleAddConfig}>Add Configuration</Text>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useRef, useState} from "react";
 //ts-ignore
-import {Text, View, ScrollView, Image, Button} from 'react-native';
+import {Text, View, ScrollView, Image, Button, SafeAreaView} from 'react-native';
 import {theme} from "../../theme";
 import Panel from "../../pages/panel/Panel.js";
 import CustomSlider from '@components/CustomSlider';
@@ -14,8 +14,17 @@ import StatusLight from "../../components/StatusLight";
 
 export const Home = ({route, navigation}) => {
     const { deviceName, isConnected } = route.params;
+    const [configUpdate, setCongifUpdate] = useState(true);
     const [configs, setConfigs] = useState([<View key={"default"}></View>]);
     var configList = [];
+
+    
+    useEffect(() => {
+        if (configUpdate) {
+            refreshConfig();
+            setCongifUpdate(false)
+        }
+    }, [configUpdate])
 
     const [volume, setVolume] = useState(20);
     const [noiseCanceling, setNoiseCanceling] = useState(20);
@@ -26,7 +35,8 @@ export const Home = ({route, navigation}) => {
         keys.forEach((key) => {
             const fillConfig = async () => {
                 const obj = await getData(key);
-                configList.push(<ConfigItem key={obj.name} title={obj.name} volume={obj.volume} noiseCanceling={obj.noiseCanceling} status={false} />)
+                console.log('obj volume : ', obj.volume)
+                configList.push(<ConfigItem remove={setCongifUpdate} key={obj.name} title={obj.name} volume={obj.volume} noiseCanceling={obj.noiseCanceling} status={false} />)
             }
             fillConfig()
         })
@@ -34,30 +44,33 @@ export const Home = ({route, navigation}) => {
     }
 
     return (<>
-    <View style={{height: "100%"}}>
-        <Image style={{marginTop: "5%", marginLeft: "5%", marginBottom: "10%", width: 100, height: 50}} source={require('../../../assets/logo.png')}/>
-        <CustomSlider title="Volume" setValue={setVolume} value={volume}/>
-        <CustomSlider title="Noise Canceling" setValue={setNoiseCanceling} value={noiseCanceling}/>
-        <Button color={theme.colors.yellow} title={"refresh config"} onPress={refreshConfig} />
-        <ScrollView>
-            {configs}
-        <AddConfigItem title={"CONFIG NAME"} />
-        </ScrollView>
-    <View style={styles.panelContainer}>
-        <View>
-            <View style={styles.speakerNameContainer}>
-                <StatusLight color={isConnected ? "#29872F" : "#E55B5B"} />
-                <Text style={styles.connectedText}>{isConnected ? "connected to" : "not connected"}</Text>
+    {/* <SafeAreaView> */}
+    <Image style={{marginTop: "5%", marginLeft: "5%", marginBottom: "10%", width: 100, height: 50}} source={require('../../../assets/logo.png')}/>
+    <ScrollView style={{}}>
+            <CustomSlider title="Volume" setValue={setVolume} value={volume}/>
+            <CustomSlider title="Noise Canceling" setValue={setNoiseCanceling} value={noiseCanceling}/>
+            <Button color={theme.colors.yellow} title={"refresh config"} onPress={() => {setCongifUpdate(true)}} />
+            <ScrollView>
+                {configs}
+            <AddConfigItem update={setCongifUpdate} title={"CONFIG NAME"} />
+            </ScrollView>
+        <View style={styles.panelContainer}>
+            <View>
+                <View style={styles.speakerNameContainer}>
+                    <StatusLight color={isConnected ? "#29872F" : "#E55B5B"} />
+                    <Text style={styles.connectedText}>{isConnected ? "connected to" : "not connected"}</Text>
+                </View>
+                {deviceName ? <View>
+                    <Text style={styles.speakerName}>{deviceName}</Text>
+                    <Button color={theme.colors.yellow} title={"DISCONNECT"} onPress={() => {navigation.navigate('Bluetooth')}} />
+                </View>: <Button color={theme.colors.yellow} title={"CONNECT"} onPress={()=> navigation.navigate('Bluetooth')}/>}
             </View>
-            {deviceName ? <View>
-                <Text style={styles.speakerName}>{deviceName}</Text>
-                <Button color={theme.colors.yellow} title={"DISCONNECT"} onPress={() => {navigation.navigate('Bluetooth')}} />
-            </View>: <Button color={theme.colors.yellow} title={"CONNECT"} onPress={()=> navigation.navigate('Bluetooth')}/>}
+            <Image style={styles.imageContainer} source={require('../../../assets/portable.png')}></Image>
         </View>
-        <Image style={styles.imageContainer} source={require('../../../assets/portable.png')}></Image>
-    </View>
-    <Jauge percentage={noiseCanceling} />
-    </View>
+        <Jauge percentage={noiseCanceling} />
+        <View style={{height: 20}}/>
+    </ScrollView>
+    {/* </SafeAreaView> */}
   {/*<Panel navigation={navigation} source={require('../../../assets/portable.png')} noiseCanceling={noiseCanceling} deviceName={deviceName} isConnected={isConnected} />*/}
   </>
   );
