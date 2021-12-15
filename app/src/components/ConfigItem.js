@@ -26,7 +26,7 @@ export function ConfigItem(props) {
 
     return (<GestureRecognizer onSwipeRight={(state) => setStatusState(!statusState)}>
     <View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
-    <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title}/>
+    <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
         <View>
             {label}

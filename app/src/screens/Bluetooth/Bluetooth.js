@@ -71,7 +71,7 @@ export const Bluetooth = ({route, navigation}) => {
     };
 
     const scanAndConnect = async () => {
-        const permission = requestLocationPermission();
+        const permission = await requestLocationPermission();
         if (!permission)
             return
         manager.startDeviceScan(null, null, (error, device) => {

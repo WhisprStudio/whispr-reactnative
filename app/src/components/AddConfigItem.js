@@ -8,11 +8,11 @@ import EditConfigModal from "./EditConfigModal.js";
 export default function AddConfigItem(props) {
 
     const [editModal, setEditModal] = useState(false);
-
-    console.log('TITLE : ', props.title)
+    const [volume, setVolume] = useState(props.volume);
+    const [noiseCanceling, setNoiseCanceling] = useState(props.noiseCanceling);
 
     return (<View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
-    <EditConfigModal update={props.update} editModal={editModal} setEditModal={setEditModal} title={props.title}/>
+    <EditConfigModal update={props.update} editModal={editModal} setEditModal={setEditModal} title={props.title} volume={volume} noiseCanceling={noiseCanceling}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
         <View>
             <Text style={styles.titleAddConfig}>Add Configuration</Text>

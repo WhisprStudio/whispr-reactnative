@@ -14,15 +14,14 @@ import StatusLight from "../../components/StatusLight";
 
 export const Home = ({route, navigation}) => {
     const { deviceName, isConnected } = route.params;
-    const [configUpdate, setCongifUpdate] = useState(true);
+    const [configUpdate, setConfigUpdate] = useState(true);
     const [configs, setConfigs] = useState([<View key={"default"}></View>]);
     var configList = [];
 
-    
     useEffect(() => {
         if (configUpdate) {
             refreshConfig();
-            setCongifUpdate(false)
+            setConfigUpdate(false)
         }
     }, [configUpdate])
 
@@ -35,8 +34,8 @@ export const Home = ({route, navigation}) => {
         keys.forEach((key) => {
             const fillConfig = async () => {
                 const obj = await getData(key);
-                console.log('obj volume : ', obj.volume)
-                configList.push(<ConfigItem remove={setCongifUpdate} key={obj.name} title={obj.name} volume={obj.volume} noiseCanceling={obj.noiseCanceling} status={false} />)
+                console.log('obj', obj)
+                configList.push(<ConfigItem remove={setConfigUpdate} key={obj.name} title={obj.name} volume={obj.volume} noiseCanceling={obj.noiseCanceling} status={false} />)
             }
             fillConfig()
         })
@@ -49,10 +48,10 @@ export const Home = ({route, navigation}) => {
     <ScrollView style={{}}>
             <CustomSlider title="Volume" setValue={setVolume} value={volume}/>
             <CustomSlider title="Noise Canceling" setValue={setNoiseCanceling} value={noiseCanceling}/>
-            <Button color={theme.colors.yellow} title={"refresh config"} onPress={() => {setCongifUpdate(true)}} />
+            {/*<Button color={theme.colors.yellow} title={"refresh config"} onPress={() => {setConfigUpdate(true)}} />*/}
             <ScrollView>
                 {configs}
-            <AddConfigItem update={setCongifUpdate} title={"CONFIG NAME"} />
+            <AddConfigItem update={setConfigUpdate} title={"CONFIG NAME"} volume={volume} noiseCanceling={noiseCanceling}/>
             </ScrollView>
         <View style={styles.panelContainer}>
             <View>

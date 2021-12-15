@@ -9,10 +9,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function EditConfigModal(props) {
 
-    const [volume, setVolume] = useState(50);
+    const [volume, setVolume] = useState(props.volume);
     // const todoInput = useRef();
-    const [noiseCanceling, setNoiseCanceling] = useState(50);
-    const [title, setTitle] = useState("CONFIG NAME");
+    const [noiseCanceling, setNoiseCanceling] = useState(props.noiseCanceling);
+    const [title, setTitle] = useState(props.title ? props.title : "CONFIG NAME");
 
     // useState(() => {
     //     setTitle("CONFIG NAME")
@@ -22,8 +22,11 @@ export default function EditConfigModal(props) {
     // console.log('NAME : ', title)
 
     const saveConfig = async () => {
-        console.log("save", title)
-        AsyncStorage.removeItem(props.title);
+        console.log("save", title, volume, noiseCanceling)
+        if (props.title)
+            AsyncStorage.removeItem(props.title);
+        else
+            AsyncStorage.removeItem("CONFIG NAME");
         storeData(title, {name: title, volume: volume, noiseCanceling: noiseCanceling });
     }
 
@@ -50,8 +53,8 @@ export default function EditConfigModal(props) {
                 <View style={{flexDirection: "row"}}>
                     <Button title={"SAVE"} color={theme.colors.yellow} style={{marginRight: 5}} onPress={() => {
                         props.setEditModal(false);
-                        props.update(true)
                         saveConfig();
+                        props.update(true)
                     }}>
                     </Button>
                     <Button title={"CANCEL"} color={theme.colors.lightRed} style={{marginLeft: 5}} onPress={() => {props.setEditModal(false)}}>
