@@ -70,6 +70,37 @@ export const Bluetooth = ({route, navigation}) => {
         })
     };
 
+    const connectToCard = (device) => {
+        manager.stopDeviceScan();
+        setIsLoading(false);
+        manager.connectToDevice(device.id, {autoConnect:true}).then((device) => {
+            setSelectedDevice(device)
+            (async () => {
+                const services = await device.discoverAllServicesAndCharacteristics()
+                const characteristic = await getServicesAndCharacteristics(services)
+                console.log("characteristic")
+                console.log(characteristic)
+                console.log("Discovering services and characteristics",characteristic.uuid);
+            })();
+            if (device.isConnected()) {
+                setEditModal(true);
+            }
+        }).catch((error)=>{
+                if (device.isConnected()) {
+                    setEditModal(true);
+                    setSelectedDevice(device);
+                } else {
+                    console.log(error)
+                    Toast.show({
+                        type: 'error',
+                        text1: 'Error',
+                        text2: 'Pairing to device failed.',
+                    })
+                }
+            }
+        );
+    };
+
     const scanAndConnect = async () => {
         const permission = await requestLocationPermission();
         if (!permission)
@@ -83,36 +114,7 @@ export const Bluetooth = ({route, navigation}) => {
             if (device.id && device.name !== "[TV] Samsung 6 Series (32)") {
                 if (idList.indexOf(device.id) === -1) {
                     idList.push(device.id)
-                    array = [array, <Card id={device.id} key={`key-${device.id}`} onPress={() => {
-                        manager.stopDeviceScan();
-                            setIsLoading(false);
-                            manager.connectToDevice(device.id, {autoConnect:true}).then((device) => {
-                                setSelectedDevice(device)
-                                (async () => {
-                                    const services = await device.discoverAllServicesAndCharacteristics()
-                                    const characteristic = await getServicesAndCharacteristics(services)
-                                    console.log("characteristic")
-                                    console.log(characteristic)
-                                    console.log("Discovering services and characteristics",characteristic.uuid);
-                                })();
-                                if (device.isConnected()) {
-                                    setEditModal(true);
-                                }
-                            }).catch((error)=>{
-                                if (device.isConnected()) {
-                                    setEditModal(true);
-                                    setSelectedDevice(device);
-                                } else {
-                                    console.log(error)
-                                    Toast.show({
-                                        type: 'error',
-                                        text1: 'Error',
-                                        text2: 'Pairing to device failed.',
-                                    })
-                                }
-                            }
-                            );
-                        }} text={device.name}/>]
+                    array = [array, <Card id={device.id} key={`key-${device.id}`} onPress={() => connectToCard(device)} text={device.name}/>]
                     setDevices(array)
                 }
             }
