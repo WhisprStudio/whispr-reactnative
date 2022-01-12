@@ -70,33 +70,32 @@ export const Bluetooth = ({route, navigation}) => {
         })
     };
 
-    const connectToCard = (device) => {
+    const connectToCard = (deviceToConnect) => {
         manager.stopDeviceScan();
         setIsLoading(false);
-        manager.connectToDevice(device.id, {autoConnect:true}).then((device) => {
-            setSelectedDevice(device)
-            (async () => {
-                const services = await device.discoverAllServicesAndCharacteristics()
+        console.log(deviceToConnect.id, "<----- device id")
+        manager.connectToDevice(deviceToConnect.id, {autoConnect:true}).then((connectedDevice) => {
+            if (connectedDevice.isConnected()) {
+                setEditModal(true);
+            }
+            setSelectedDevice(connectedDevice)
+            const lol = async () => {
+                const services = await connectedDevice.discoverAllServicesAndCharacteristics()
+                console.log(services)
                 const characteristic = await getServicesAndCharacteristics(services)
                 console.log("characteristic")
                 console.log(characteristic)
-                console.log("Discovering services and characteristics",characteristic.uuid);
-            })();
-            if (device.isConnected()) {
-                setEditModal(true);
-            }
+                console.log("Discovering services and characteristics", characteristic.uuid);
+            };
+            lol();
+
         }).catch((error)=>{
-                if (device.isConnected()) {
-                    setEditModal(true);
-                    setSelectedDevice(device);
-                } else {
-                    console.log(error)
-                    Toast.show({
-                        type: 'error',
-                        text1: 'Error',
-                        text2: 'Pairing to device failed.',
-                    })
-                }
+            console.log(error)
+                Toast.show({
+                    type: 'error',
+                    text1: 'Error',
+                    text2: 'Paring to device failed',
+                })
             }
         );
     };

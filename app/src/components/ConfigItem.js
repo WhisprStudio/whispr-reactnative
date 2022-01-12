@@ -18,7 +18,7 @@ export function ConfigItem(props) {
         label = <Text style={styles.textConfig}>{props.title}</Text>;
         status = <Text style={styles.statusUnactive}> unactive</Text>;
     } else if (statusState === true) {
-        label = <Text style={styles.textConfig, styles.textActive}>{props.title}</Text>;
+        label = <Text style={styles.textConfig && styles.textActive}>{props.title}</Text>;
         status = <Text style={styles.statusActive}> active</Text>;
     }
 
