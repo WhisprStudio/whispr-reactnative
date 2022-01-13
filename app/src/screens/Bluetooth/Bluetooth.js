@@ -111,9 +111,9 @@ export const Bluetooth = ({route, navigation}) => {
                 manager.stopDeviceScan();
             }
             if (device?.id && device.name !== "[TV] Samsung 6 Series (32)") {
-                if (idList.indexOf(device.id) === -1) {
-                    idList.push(device.id)
-                    array = [array, <Card id={device.id} key={`key-${device.id}`} onPress={() => connectToCard(device)} text={device.name}/>]
+                if (idList.indexOf(device?.id) === -1) {
+                    idList.push(device?.id)
+                    array = [array, <Card id={device?.id} key={`key-${device?.id}`} onPress={() => connectToCard(device)} text={device.name}/>]
                     setDevices(array)
                 }
             }
@@ -135,7 +135,7 @@ export const Bluetooth = ({route, navigation}) => {
             </View>
         </View>
         {isLoading ? <ActivityIndicator size={"large"} color={theme.colors.yellow}/>:
-            <Text style={{fontSize: 30}}>{selectedDevice ? selectedDevice.id : "none"}</Text>
+            <Text style={{fontSize: 30}}>{selectedDevice ? selectedDevice?.id : "none"}</Text>
         }
             <ScrollView>{devices}</ScrollView>
     </View>
