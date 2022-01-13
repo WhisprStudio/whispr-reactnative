@@ -110,7 +110,7 @@ export const Bluetooth = ({route, navigation}) => {
                 alert("Error in scan=> " + error);
                 manager.stopDeviceScan();
             }
-            if (device.id && device.name !== "[TV] Samsung 6 Series (32)") {
+            if (device?.id && device.name !== "[TV] Samsung 6 Series (32)") {
                 if (idList.indexOf(device.id) === -1) {
                     idList.push(device.id)
                     array = [array, <Card id={device.id} key={`key-${device.id}`} onPress={() => connectToCard(device)} text={device.name}/>]

@@ -16,7 +16,9 @@ export const Home = ({route, navigation}) => {
     const { deviceName, isConnected } = route.params;
     const [configUpdate, setConfigUpdate] = useState(true);
     const [configs, setConfigs] = useState([<View key={"default"}></View>]);
-    var configList = [];
+    let configList = [];
+    const [volume, setVolume] = useState(20);
+    const [noiseCanceling, setNoiseCanceling] = useState(20);
 
     useEffect(() => {
         if (configUpdate) {
@@ -25,8 +27,18 @@ export const Home = ({route, navigation}) => {
         }
     }, [configUpdate])
 
-    const [volume, setVolume] = useState(20);
-    const [noiseCanceling, setNoiseCanceling] = useState(20);
+    useEffect(() => {
+    }, [volume, noiseCanceling])
+
+    const isConfigActive = async (conf) => {
+        const data = await getData("activeConfig");
+        if (data?.name === conf.name) {
+            setVolume(conf.volume)
+            setNoiseCanceling(conf.noiseCanceling)
+            return true
+        }
+        return false;
+    }
 
     const refreshConfig = async () => {
         const keys = await getConfigs();
@@ -34,12 +46,12 @@ export const Home = ({route, navigation}) => {
         keys.forEach((key) => {
             const fillConfig = async () => {
                 const obj = await getData(key);
-                console.log('obj', obj)
-                configList.push(<ConfigItem remove={setConfigUpdate} key={obj.name} title={obj.name} volume={obj.volume} noiseCanceling={obj.noiseCanceling} status={false} />)
+                configList.push(<ConfigItem remove={setConfigUpdate} key={obj.name} title={obj.name} volume={obj.volume} noiseCanceling={obj.noiseCanceling} status={await isConfigActive(obj)} />)
             }
-            fillConfig()
+            if (key !== "activeConfig")
+                fillConfig()
         })
-        setTimeout(() => setConfigs(configList), 1000);
+        setTimeout(() => setConfigs(configList), 100);
     }
 
     return (<>

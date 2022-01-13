@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Text, View, TouchableOpacity, Modal} from 'react-native';
 import EditConfig from "../../assets/svg/EditConfig.js";
 import CloseIcon from "../../assets/svg/CloseIcon.js";
@@ -7,24 +7,40 @@ import EditConfigModal from "./EditConfigModal.js";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import {theme} from "@theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {storeData} from "../dataStore/UtilsData";
 
 export function ConfigItem(props) {
 
-    var status = <Text></Text>;
+    let status = <Text></Text>;
     let label = <Text></Text>;
-    const [statusState, setStatusState] = useState(false);
+    const [update, setUpdate] = useState(false);
 
-    if (statusState === false) {
-        label = <Text style={styles.textConfig}>{props.title}</Text>;
-        status = <Text style={styles.statusUnactive}> unactive</Text>;
-    } else if (statusState === true) {
-        label = <Text style={styles.textConfig && styles.textActive}>{props.title}</Text>;
-        status = <Text style={styles.statusActive}> active</Text>;
+    if (props.status === false) {
+        label = <Text style={styles.textConfig}>{props.title}</Text>
+        status = <Text style={styles.statusUnactive}> unactive</Text>
+    } else {
+        label = <Text style={styles.textConfig && styles.textActive}>{props.title}</Text>
+        status = <Text style={styles.statusActive}> active</Text>
     }
+
+
+    useEffect(() => {
+        if (props.status === false) {
+            storeData("activeConfig", {name: props.title, noiseCanceling: props.noiseCanceling, volume: props.volume});
+        } else {
+            AsyncStorage.removeItem("activeConfig")
+        }
+        props.remove(true);
+    }, [])
+
+    useEffect(() => {
+        storeData("activeConfig", {name: props.title, noiseCanceling: props.noiseCanceling, volume: props.volume});
+        props.remove(true);
+    }, [update])
 
     const [editModal, setEditModal] = useState(false);
 
-    return (<GestureRecognizer onSwipeRight={(state) => setStatusState(!statusState)}>
+    return (<GestureRecognizer onSwipeRight={() => setUpdate(!update)}>
     <View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
     <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
