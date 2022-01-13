@@ -6,6 +6,7 @@ import Card from "../../components/Card";
 import {Popup} from "../../components/Popup";
 import Toast from 'react-native-toast-message';
 import {theme} from "../../theme";
+import BluetoothStateManager from 'react-native-bluetooth-state-manager';
 
 async function requestLocationPermission() {
       const granted = await PermissionsAndroid.request(
@@ -107,8 +108,23 @@ export const Bluetooth = ({route, navigation}) => {
         manager.startDeviceScan(null, null, (error, device) => {
             setIsLoading(true);
             if (error) {
-                alert("Error in scan=> " + error);
+                Toast.show({
+                    type: 'error',
+                    text1: 'Error',
+                    text2: error.reason,
+                })
+                console.log(error.errorCode)
+                if (error.errorCode === 102) {
+                    if (BluetoothStateManager.enable()) {
+                        Toast.show({
+                            type: 'info',
+                            text1: 'Bluetooth is disabled',
+                            text2: 'We are taking care of this...',
+                        })
+                    }
+                }
                 manager.stopDeviceScan();
+                return;
             }
             if (device?.id && device.name !== "[TV] Samsung 6 Series (32)") {
                 if (idList.indexOf(device?.id) === -1) {
