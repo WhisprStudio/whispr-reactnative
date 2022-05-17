@@ -2,8 +2,8 @@ import * as React from "react";
 import { useState } from 'react';
 import { Text, View, TouchableOpacity, Modal} from 'react-native';
 import {theme} from "@theme/index";
-import AddConfig from "../../assets/svg/AddConfig.js";
-import EditConfigModal from "./EditConfigModal.js";
+import AddConfig from "../../../assets/svg/AddConfig.js";
+import EditConfigModal from "@components/EditConfigModal/EditConfigModal.js";
 
 export default function AddConfigItem(props) {
 

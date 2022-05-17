@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import {UnknownDevice} from "../icons/UnknownDevice";
+import {UnknownDevice} from "@icons/UnknownDevice";
 
 export default function Card(props) {
     return (<>{ props.text ?

@@ -3,8 +3,8 @@ import {useEffect, useState, useRef} from "react";
 import { Button } from 'react-native';
 import {theme} from '@theme';
 import { Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
-import CustomSlider from './CustomSlider';
-import {getData, storeData} from "../dataStore/UtilsData";
+import CustomSlider from '@components/CustomSlider/CustomSlider';
+import {getData, storeData} from "@dataStore/UtilsData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function EditConfigModal(props) {

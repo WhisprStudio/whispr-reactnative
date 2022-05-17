@@ -1,6 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {MainNavigator} from './main';
+import {storeData, getData} from '@components/../dataStore/UtilsData.js';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();

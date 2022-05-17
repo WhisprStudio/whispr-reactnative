@@ -10,9 +10,9 @@ export const storeData = async (key, value) => {
   }
 };
 
-export const getData = async key => {
+export const getData = async (key, thenFunction) => {
   try {
-    const jsonValue = await AsyncStorage.getItem(key);
+    const jsonValue = await AsyncStorage.getItem(key).then(thenFunction);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     // error reading value

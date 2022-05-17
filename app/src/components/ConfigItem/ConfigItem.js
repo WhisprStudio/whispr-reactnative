@@ -1,13 +1,13 @@
 import * as React from "react";
 import {useEffect, useState} from 'react';
 import { Text, View, TouchableOpacity, Modal} from 'react-native';
-import EditConfig from "../../assets/svg/EditConfig.js";
-import CloseIcon from "../../assets/svg/CloseIcon.js";
-import EditConfigModal from "./EditConfigModal.js";
+import EditConfig from "../../../assets/svg/EditConfig.js";
+import CloseIcon from "../../../assets/svg/CloseIcon.js";
+import EditConfigModal from "@components/EditConfigModal/EditConfigModal.js";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import {theme} from "@theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {storeData} from "../dataStore/UtilsData";
+import {storeData} from "@dataStore/UtilsData";
 
 export function ConfigItem(props) {
 
@@ -17,7 +17,7 @@ export function ConfigItem(props) {
 
     if (props.status === false) {
         label = <Text style={styles.textConfig}>{props.title}</Text>
-        status = <Text style={styles.statusUnactive}> unactive</Text>
+        status = <Text style={styles.statusUnactive}> inactive</Text>
     } else {
         label = <Text style={styles.textConfig && styles.textActive}>{props.title}</Text>
         status = <Text style={styles.statusActive}> active</Text>

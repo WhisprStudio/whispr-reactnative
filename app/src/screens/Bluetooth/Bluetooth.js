@@ -2,10 +2,10 @@ import React from "react";
 import {useEffect, useState} from "react";
 import {View, Text, Button, PermissionsAndroid, ScrollView, ActivityIndicator } from "react-native";
 import {BleManager} from 'react-native-ble-plx';
-import Card from "../../components/Card";
-import {Popup} from "../../components/Popup";
+import Card from "@components/Card/Card";
+import {Popup} from "@components/Popup/Popup";
 import Toast from 'react-native-toast-message';
-import {theme} from "../../theme";
+import {theme} from "@theme/theme";
 import BluetoothStateManager from 'react-native-bluetooth-state-manager';
 
 async function requestLocationPermission() {
@@ -106,6 +106,7 @@ export const Bluetooth = ({route, navigation}) => {
         if (!permission)
             return
         manager.startDeviceScan(null, null, (error, device) => {
+            // console.log('device :', device)
             setIsLoading(true);
             if (error) {
                 Toast.show({
@@ -126,7 +127,7 @@ export const Bluetooth = ({route, navigation}) => {
                 manager.stopDeviceScan();
                 return;
             }
-            if (device?.id && device.name !== "[TV] Samsung 6 Series (32)") {
+            if (device?.id && device.name !== "[TV] Samsung 7 Series (65)") {
                 if (idList.indexOf(device?.id) === -1) {
                     idList.push(device?.id)
                     array = [array, <Card id={device?.id} key={`key-${device?.id}`} onPress={() => connectToCard(device)} text={device.name}/>]

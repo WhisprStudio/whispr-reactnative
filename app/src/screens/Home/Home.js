@@ -1,24 +1,37 @@
 import * as React from 'react';
 import {useEffect, useRef, useState} from 'react';
-import {Text, View, ScrollView, Image, Button} from 'react-native';
+import {Text, View, ScrollView, Image, Button, TouchableOpacity} from 'react-native';
 import {theme} from '../../theme';
-import CustomSlider from '@components/CustomSlider';
-import {ConfigItem} from '@components/ConfigItem.js';
-import AddConfigItem from '@components/AddConfigItem.js';
+import CustomSlider from '@components/CustomSlider/CustomSlider';
+import {ConfigItem} from '@components/ConfigItem/ConfigItem.js';
+import AddConfigItem from '@components/AddConfigItem/AddConfigItem.js';
 import {storeData, getData} from '@components/../dataStore/UtilsData.js';
-import {getConfigs} from '../../dataStore/UtilsData';
-import Jauge from '../../components/Jauge';
-import StatusLight from '../../components/StatusLight';
-import {Fav} from '../../icons/Fav';
+import Carousel from '@components/Carousel/Carousel';
+import {getConfigs} from '@dataStore/UtilsData';
+import Jauge from '@components/Jauge/Jauge';
+import StatusLight from '@components/StatusLight/StatusLight';
+import {Fav} from '@icons/Fav';
 
 export const Home = ({route, navigation}) => {
   const {deviceName, isConnected} = route.params;
   const [configUpdate, setConfigUpdate] = useState(true);
+  const [showTutorial, setShowTutorial] = useState(false)
   const [configs, setConfigs] = useState([<View key={'default'} />]);
   let configList = [];
   const [volume, setVolume] = useState(20);
   const [noiseCanceling, setNoiseCanceling] = useState(20);
   const [fav, setFav] = useState('');
+
+  useEffect(() => {
+    getData('alreadyLaunched', (value) => {
+      if(value == null) {
+        storeData('alreadyLaunched', true);
+        setShowTutorial(true)
+      } else {
+        setShowTutorial(false)
+      }
+    })
+  }, [route.params])
 
   useEffect(() => {
     if (configUpdate) {
@@ -44,13 +57,13 @@ export const Home = ({route, navigation}) => {
     console.log(res, 'res');
     const keys = await getConfigs();
     configList = [];
-    keys.forEach(key => {
+    keys.forEach((key, index) => {
       const fillConfig = async () => {
         const obj = await getData(key);
         configList.push(
           <ConfigItem
             remove={setConfigUpdate}
-            key={obj.name}
+            key={'configItem' + index}
             title={obj.name}
             volume={obj.volume}
             noiseCanceling={obj.noiseCanceling}
@@ -72,19 +85,50 @@ export const Home = ({route, navigation}) => {
     setFav(res);
   };
 
+
+  if (showTutorial === true) {
+    return (
+      <>
+        <Carousel setShowTutorial={setShowTutorial}/>
+      </>
+    )
+  }
+
   return (
     <>
       {/* <SafeAreaView> */}
-      <Image
-        style={{
-          marginTop: '5%',
-          marginLeft: '5%',
-          marginBottom: '10%',
-          width: 100,
-          height: 50,
-        }}
-        source={require('../../../assets/logo.png')}
-      />
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Image
+          style={{
+            marginTop: '5%',
+            marginLeft: '5%',
+            marginBottom: '10%',
+            width: 100,
+            height: 50,
+            // border: 'solid 1px red'
+          }}
+          source={require('../../../assets/logo.png')}
+        />
+        <TouchableOpacity
+          style={{
+            marginTop: '5%',
+            marginRight: '2%',
+          }}
+          onPress={() => {
+            setShowTutorial(true)
+          }}
+        >
+          <Image
+            style={{
+              width: 40,
+              height: 50,
+            }}
+            resizeMode={'contain'}
+            source={require('../../../assets/query.png')}
+          />
+        </TouchableOpacity>
+      </View>
+
       <ScrollView style={{}}>
         <CustomSlider title="Volume" setValue={setVolume} value={volume} />
         <CustomSlider

@@ -21,7 +21,7 @@ export const BluetoothSelect = ({scanAndConnect, device}) => {
     return (
         <View>
             <Image style={styles.image} source={require('../../../assets/logo.png')}/>
-            {!selectDevice ? 
+            {!selectDevice ?
             <Text display={false} style={styles.text}>SELECT YOUR SPEAKER</Text> : <View style={styles.text}></View>}
             <CardBluetooth imageSrc={wireless1} wirelessName={'Portable V1'} select={selectDevice} setSelect={setSelectDevice}/>
             <CardBluetooth imageSrc={wireless2} wirelessName={'Salon V1'} select={selectDevice} setSelect={setSelectDevice}/>
