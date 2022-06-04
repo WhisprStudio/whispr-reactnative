@@ -2,14 +2,14 @@ import * as React from "react";
 import Slider from "@react-native-community/slider";
 import {View, Text} from "react-native";
 
-export default function Jauge(props) {
+export default function Jauge({percentage = 0}) {
 
-    const size = props.percentage;
+    const size = percentage;
   return (
   <>
     <View style={styles.textContainer}>
         <Text style={styles.textLeft}>Noise Cancelation</Text>
-        <Text style={styles.textRight}>{parseInt(props.percentage)}%</Text>
+        <Text style={styles.textRight}>{parseInt(percentage)}%</Text>
     </View>
     <View style={{
         backgroundColor: "#B7B4A5",

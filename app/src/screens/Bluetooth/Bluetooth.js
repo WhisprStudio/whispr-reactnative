@@ -2,10 +2,11 @@ import React from "react";
 import {useEffect, useState} from "react";
 import {View, Text, Button, PermissionsAndroid, ScrollView, ActivityIndicator } from "react-native";
 import {BleManager} from 'react-native-ble-plx';
-import Card from "../../components/Card";
-import {Popup} from "../../components/Popup";
+import Card from "@components/Card/Card";
+import {Popup} from "@components/Popup/Popup";
 import Toast from 'react-native-toast-message';
-import {theme} from "../../theme";
+import {theme} from "@theme/theme";
+import BluetoothStateManager from 'react-native-bluetooth-state-manager';
 
 async function requestLocationPermission() {
       const granted = await PermissionsAndroid.request(
@@ -105,12 +106,32 @@ export const Bluetooth = ({route, navigation}) => {
         if (!permission)
             return
         manager.startDeviceScan(null, null, (error, device) => {
+            // console.log('device :', device)
             setIsLoading(true);
             if (error) {
-                alert("Error in scan=> " + error);
+                Toast.show({
+                    type: 'error',
+                    text1: 'Error',
+                    text2: error.reason,
+                })
+                console.log(error.errorCode)
+                if (error.errorCode === 102) {
+                    if (BluetoothStateManager.enable()) {
+                        Toast.show({
+                            type: 'info',
+                            text1: 'Bluetooth is disabled',
+                            text2: 'We are taking care of this...',
+                        })
+                    }
+                }
                 manager.stopDeviceScan();
+                return;
             }
+<<<<<<< HEAD
             if (device?.id && device.name !== "[TV] Samsung 6 Series (32)") {
+=======
+            if (device?.id && device.name !== "[TV] Samsung 7 Series (65)") {
+>>>>>>> 026053b9a22a1f7d42a12b235dae7ed5990a8398
                 if (idList.indexOf(device?.id) === -1) {
                     idList.push(device?.id)
                     array = [array, <Card id={device?.id} key={`key-${device?.id}`} onPress={() => connectToCard(device)} text={device.name}/>]
