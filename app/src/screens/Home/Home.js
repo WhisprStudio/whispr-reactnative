@@ -10,13 +10,15 @@ import Carousel from '@components/Carousel/Carousel';
 import {getConfigs} from '@dataStore/UtilsData';
 import Jauge from '@components/Jauge/Jauge';
 import StatusLight from '@components/StatusLight/StatusLight';
-import {Fav} from '@icons/Fav';
+import BluetoothSerial from "react-native-bluetooth-serial";
+import Toast from "react-native-toast-message";
 
 export const Home = ({route, navigation}) => {
   const {deviceName, isConnected} = route.params;
+  const [setConnected, connected] = useState(false);
   const [configUpdate, setConfigUpdate] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false)
-  const [configs, setConfigs] = useState([<View key={'default'} />]);
+  const [configs, setConfigs] = useState([<View/>]);
   let configList = [];
   const [volume, setVolume] = useState(20);
   const [noiseCanceling, setNoiseCanceling] = useState(20);
@@ -40,21 +42,31 @@ export const Home = ({route, navigation}) => {
     }
   }, [configUpdate]);
 
-  useEffect(() => {}, [volume, noiseCanceling]);
+  useEffect(async () => {
+    if (!BluetoothSerial.isConnected()) {
+      triggerErrorToast()
+    } else {
+      setConnected(true)
+    }
+    if (volume !== undefined && noiseCanceling !== undefined)
+      await BluetoothSerial.write(`volume: ${volume}, noiseCanceling: ${noiseCanceling}\n`)
+  }, [volume, noiseCanceling, setConnected]);
 
   const isConfigActive = async conf => {
     const data = await getData('activeConfig');
     if (data?.name === conf.name) {
       setVolume(conf.volume);
       setNoiseCanceling(conf.noiseCanceling);
+      if (conf.volume !== undefined && conf.noiseCanceling !== undefined) {
+        await BluetoothSerial.write(`Config name: ${conf.name}, volume ${conf.volume}, noiseCanceling ${conf.noiseCanceling}\n`)
+      }
       return true;
     }
     return false;
   };
 
   const refreshConfig = async () => {
-    const res = await getFav();
-    console.log(res, 'res');
+    // const res = await getFav();
     const keys = await getConfigs();
     configList = [];
     keys.forEach((key, index) => {
@@ -71,7 +83,7 @@ export const Home = ({route, navigation}) => {
           />,
         );
       };
-      if (key !== 'activeConfig' && key != 'FAV') fillConfig();
+      if (key !== 'activeConfig' && key !== 'FAV') fillConfig();
     });
     setTimeout(() => setConfigs(configList), 100);
   };
@@ -85,6 +97,11 @@ export const Home = ({route, navigation}) => {
     setFav(res);
   };
 
+  const triggerErrorToast = () => Toast.show({
+    type: 'info',
+    text1: 'Info',
+    text2: 'Please, connect to your speaker through settings.'
+  });
 
   if (showTutorial === true) {
     return (
@@ -93,7 +110,6 @@ export const Home = ({route, navigation}) => {
       </>
     )
   }
-
   return (
     <>
       {/* <SafeAreaView> */}
@@ -149,9 +165,9 @@ export const Home = ({route, navigation}) => {
         <View style={styles.panelContainer}>
           <View>
             <View style={styles.speakerNameContainer}>
-              <StatusLight color={isConnected ? '#29872F' : '#E55B5B'} />
+              <StatusLight color={connected ? '#29872F' : '#E55B5B'} />
               <Text style={styles.connectedText}>
-                {isConnected ? 'connected to' : 'not connected'}
+                {connected ? 'connected' : 'not connected'}
               </Text>
             </View>
             {deviceName ? (
@@ -166,30 +182,30 @@ export const Home = ({route, navigation}) => {
                   }}
                 />
               </View>
-            ) : (
-              <Button
+            ) : <></>}
+            {/*              <Button
                 color={theme.colors.yellow}
                 title={'CONNECT'}
                 onPress={() => {
                   // eslint-disable-next-line react/prop-types
                   navigation.navigate('Bluetooth');
                 }}
-              />
-            )}
+              />*/}
+
           </View>
           <Image
             style={styles.imageContainer}
             source={require('../../../assets/portable.png')}
           />
         </View>
-        <View style={{paddingLeft: 200, paddingRight: 40}}>
+{/*        <View style={{paddingLeft: 200, paddingRight: 40}}>
           <Text style={styles.speakerName}>{fav}</Text>
           <Button
             color={theme.colors.yellow}
             title={'FAV'}
             onPress={() => addFav()}
           />
-        </View>
+        </View>*/}
         <Jauge percentage={noiseCanceling} />
         <View style={{height: 20}} />
       </ScrollView>

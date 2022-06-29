@@ -1,5 +1,5 @@
 package com.whispr.device.app;
-
+import com.rusel.RCTBluetoothSerial.*;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
