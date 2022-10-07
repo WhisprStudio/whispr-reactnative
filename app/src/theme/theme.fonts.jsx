@@ -12,4 +12,8 @@ export const fonts = {
         light: 'Barlow-Light',
         thinItalic: 'Barlow-ThinItalic',
       },
+      HelvetocaNeue: {
+        bold: 'HelveticaNeue-Bold',
+        italic: 'Helvetica-Neue-Bold-Italic',
+      }
 }
