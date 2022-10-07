@@ -146,31 +146,18 @@ export const Home = ({route, navigation}) => {
       </View>
 
       <ScrollView style={{}}>
-        <CustomSlider title="WVolume" setValue={setVolume} value={volume} />
-        <CustomSlider
-          title="Noise Canceling"
-          setValue={setNoiseCanceling}
-          value={noiseCanceling}
-        />
+
         {/*<Button color={theme.colors.yellow} title={"refresh config"} onPress={() => {setConfigUpdate(true)}} />*/}
         <ScrollView>
-          {configs}
-          <AddConfigItem
-            update={setConfigUpdate}
-            title={'CONFIG NAME'}
-            volume={volume}
-            noiseCanceling={noiseCanceling}
-          />
-        </ScrollView>
         <View style={styles.panelContainer}>
-          <View>
+          {/* <View> */}
             <View style={styles.speakerNameContainer}>
-              <StatusLight color={connected ? '#29872F' : '#E55B5B'} />
               <Text style={styles.connectedText}>
                 {connected ? 'connected' : 'not connected'}
               </Text>
+              <StatusLight color={connected ? '#29872F' : '#E55B5B'} />
             </View>
-            {deviceName ? (
+            {deviceName && (
               <View>
                 <Text style={styles.speakerName}>{deviceName}</Text>
                 <Button
@@ -182,7 +169,7 @@ export const Home = ({route, navigation}) => {
                   }}
                 />
               </View>
-            ) : <></>}
+            )}
             {/*              <Button
                 color={theme.colors.yellow}
                 title={'CONNECT'}
@@ -192,22 +179,29 @@ export const Home = ({route, navigation}) => {
                 }}
               />*/}
 
-          </View>
+          {/* </View> */}
           <Image
             style={styles.imageContainer}
             source={require('../../../assets/portable.png')}
           />
         </View>
-{/*        <View style={{paddingLeft: 200, paddingRight: 40}}>
-          <Text style={styles.speakerName}>{fav}</Text>
-          <Button
-            color={theme.colors.yellow}
-            title={'FAV'}
-            onPress={() => addFav()}
+
+          {configs}
+          <AddConfigItem
+            update={setConfigUpdate}
+            title={'CONFIG NAME'}
+            volume={volume}
+            noiseCanceling={noiseCanceling}
           />
-        </View>*/}
-        <Jauge percentage={noiseCanceling} />
-        <View style={{height: 20}} />
+        </ScrollView>
+        {/* <Jauge percentage={noiseCanceling} /> */}
+        {/* <View style={{height: 20}} /> */}
+        <CustomSlider title="WVolume" setValue={setVolume} value={volume} />
+        <CustomSlider
+          title="Noise Canceling"
+          setValue={setNoiseCanceling}
+          value={noiseCanceling}
+        />
       </ScrollView>
       {/* </SafeAreaView> */}
       {/*<Panel navigation={navigation} source={require('../../../assets/portable.png')} noiseCanceling={noiseCanceling} deviceName={deviceName} isConnected={isConnected} />*/}
@@ -217,7 +211,10 @@ export const Home = ({route, navigation}) => {
 
 const styles = {
   speakerNameContainer: {
+    // marginLeft: 20,
+
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -244,9 +241,10 @@ const styles = {
     height: 120,
   },
   connectedText: {
-    color: '#fff',
-    fontFamily: 'Cubano',
+    color: theme.colors.gray,
+    fontFamily: theme.fonts.primary.normal,
     fontWeight: '200',
+    marginRight: 10,
   },
   speakerName: {
     color: '#fff',
