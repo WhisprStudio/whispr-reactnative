@@ -40,7 +40,7 @@ export function ConfigItem(props) {
 
     return (
       <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-        <TouchableOpacity key={'configItem' + props?.index} style={{width: '80%', backgroundColor: theme.colors.black, borderColor: props.index % 2 == 0 ? theme.colors.yellow : null, borderRadius: 15, borderWidth: props.index % 2 == 0 ? 2 : 0, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
+        <TouchableOpacity key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: props.index % 2 == 0 ? theme.colors.yellow : null, borderRadius: 15, borderWidth: props.index % 2 == 0 ? 2 : 0, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
           <View style={{}}>
             <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
             <View style={{ alignItems: 'center', flexDirection: "row", justifyContent: 'space-between'}}>
@@ -80,7 +80,7 @@ const styles = {
     },
     textConfig: {
         marginLeft: 10,
-        fontSize: 15,
+        fontSize: 11,
         color: theme.colors.white,
         fontWeight: 'bold',
     },
@@ -91,7 +91,7 @@ const styles = {
     },
     textActive: {
         marginLeft: 10,
-        fontSize: 17,
+        fontSize: 13,
         fontFamily: theme.fonts.secondary.semiBold,
         color: theme.colors.white,
     },
