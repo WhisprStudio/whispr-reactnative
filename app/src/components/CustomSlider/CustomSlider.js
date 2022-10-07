@@ -1,6 +1,8 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import Slider from "@react-native-community/slider";
+// import Slider from "@react-native-community/slider";
+import {Slider} from '@miblanchard/react-native-slider';
+
 import {View, Text} from "react-native";
 import {theme} from "@theme";
 
@@ -8,26 +10,39 @@ export default function CustomSlider(props) {
 const [givenValue, setGivenValue] = useState(props.value)
 
   useEffect(() => {
-    if ( props.newValue ) {
-      setGivenValue(props?.newValue)
+    if ( props?.value ) {
+      setGivenValue(props?.value)
     }
-  }, [props?.newValue]);
-
-
+  }, [props?.value]);
 
   return (
-  <View>
-            <Text style={styles.text}>{props.title}</Text>
-            <Slider style={{height: 40, margin: 0, padding: 0}} onValueChange={(value) => {props.setValue ? props.setValue(value): console.log("error")}} value={givenValue} minimumValue={0} maximumValue={100} minimumTrackTintColor={theme.colors.yellow} thumbTintColor={"#fff"}/>
+  <View style={{ padding: 20, }}>
+      <Text style={styles.text}>{props.title}</Text>
+      <Slider
+        animateTransitions={true}
+        onValueChange={(value) => {props.setValue ? props.setValue(value ): console.log("error")}}
+        value={givenValue}
+        trackStyle={{
+          borderRadius: 10,
+          height: 15,
+          backgroundColor: theme.colors.gray,
+        }}
+        thumbTintColor={theme.colors.white}
+        thumbStyle={{
+          height: 0,
+          width: 0,
+        }}
+        minimumTrackTintColor={theme.colors.yellow}
+        maximumValue={100}
+      />
     </View>
   );
 }
 
 const styles = {
     text: {
-        paddingLeft: 15,
         fontSize: 20,
-        color: "#fff",
+        color: theme.colors.white,
         fontFamily: theme.fonts.primary.normal,
    },
 };

@@ -1,7 +1,7 @@
 export const colors = {
     lightRed : '#E55B5B',
-    gray : '#AFAFAF',
+    gray : '#CECECE',
     white : '#FFFFFF',
-    yellow : '#FFB745',
+    yellow : '#FFAE00',
     black: '#2B2C33'
 };

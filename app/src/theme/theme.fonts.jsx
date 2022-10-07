@@ -1,6 +1,8 @@
 export const fonts = {
-    primary: {
-        normal: 'Cubano',
+      primary: {
+        normal: 'Raleway-Regular',
+        bold: 'Raleway-Bold',
+        italicBold: 'Raleway-Bold-Italic',
       },
       secondary: {
         normal: 'Barlow-Black',
@@ -12,8 +14,5 @@ export const fonts = {
         light: 'Barlow-Light',
         thinItalic: 'Barlow-ThinItalic',
       },
-      HelvetocaNeue: {
-        bold: 'HelveticaNeue-Bold',
-        italic: 'Helvetica-Neue-Bold-Italic',
-      }
+
 }

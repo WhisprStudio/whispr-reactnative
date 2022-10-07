@@ -15,7 +15,7 @@ import Toast from "react-native-toast-message";
 
 export const Home = ({route, navigation}) => {
   const {deviceName, isConnected} = route.params;
-  const [setConnected, connected] = useState(false);
+  const [connected, setConnected] = useState(false);
   const [configUpdate, setConfigUpdate] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false)
   const [configs, setConfigs] = useState([<View/>]);
@@ -146,7 +146,7 @@ export const Home = ({route, navigation}) => {
       </View>
 
       <ScrollView style={{}}>
-        <CustomSlider title="Volume" setValue={setVolume} value={volume} />
+        <CustomSlider title="WVolume" setValue={setVolume} value={volume} />
         <CustomSlider
           title="Noise Canceling"
           setValue={setNoiseCanceling}
