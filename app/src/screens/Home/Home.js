@@ -152,7 +152,7 @@ export const Home = ({route, navigation}) => {
           {/* <View> */}
             <View style={styles.speakerNameContainer}>
               <Text style={styles.connectedText}>
-                {connected ? 'connected' : 'not connected'}
+                {connected ? 'Connected' : 'Not connected'}
               </Text>
               <StatusLight color={connected ? '#29872F' : '#E55B5B'} />
             </View>
@@ -195,7 +195,7 @@ export const Home = ({route, navigation}) => {
         </ScrollView>
         {/* <Jauge percentage={noiseCanceling} /> */}
         {/* <View style={{height: 20}} /> */}
-        <CustomSlider title="WVolume" setValue={setVolume} value={volume} />
+        <CustomSlider title="Volume" setValue={setVolume} value={volume} />
         <CustomSlider
           title="Noise Canceling"
           setValue={setNoiseCanceling}
