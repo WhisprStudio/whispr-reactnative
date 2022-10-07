@@ -4,8 +4,9 @@ import Svg, { Path, G } from "react-native-svg";
 const SvgSound = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={18.647}
-    height={17.6}
+    width={'100%'}
+    height={'100%'}
+    scale={0.2}
     {...props}
   >
     <G
