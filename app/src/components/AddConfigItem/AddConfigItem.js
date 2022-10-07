@@ -11,7 +11,7 @@ export default function AddConfigItem(props) {
     const [volume, setVolume] = useState(props.volume);
     const [noiseCanceling, setNoiseCanceling] = useState(props.noiseCanceling);
 
-    return (<View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
+    return (<View style={{marginLeft: 0, marginRight: 0, marginTop: 5, marginBottom: 0}}>
     <EditConfigModal update={props.update} editModal={editModal} setEditModal={setEditModal} title={props.title} volume={volume} noiseCanceling={noiseCanceling}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
         <View/>
@@ -21,7 +21,7 @@ export default function AddConfigItem(props) {
         </TouchableOpacity>
         </View>
     </View>
-        <View style={styles.line}></View>
+        {/* <View style={styles.line}></View> */}
     </View>);
 }
 

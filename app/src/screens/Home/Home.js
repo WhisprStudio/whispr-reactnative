@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useRef, useState} from 'react';
-import {Text, View, ScrollView, Image, Button, TouchableOpacity} from 'react-native';
+import {Text, View, ScrollView, Image, Button, TouchableOpacity, TextInput} from 'react-native';
 import {theme} from '../../theme';
 import CustomSlider from '@components/CustomSlider/CustomSlider';
 import {ConfigItem} from '@components/ConfigItem/ConfigItem.js';
@@ -11,6 +11,7 @@ import {getConfigs} from '@dataStore/UtilsData';
 import Jauge from '@components/Jauge/Jauge';
 import StatusLight from '@components/StatusLight/StatusLight';
 import BluetoothSerial from "react-native-bluetooth-serial";
+import AddConfig from "../../../assets/svg/AddConfig.js";
 import Toast from "react-native-toast-message";
 
 export const Home = ({route, navigation}) => {
@@ -118,7 +119,7 @@ export const Home = ({route, navigation}) => {
           style={{
             marginTop: '5%',
             marginLeft: '5%',
-            marginBottom: '10%',
+            marginBottom: '5%',
             width: 100,
             height: 50,
             // border: 'solid 1px red'
@@ -149,7 +150,6 @@ export const Home = ({route, navigation}) => {
         {/*<Button color={theme.colors.yellow} title={"refresh config"} onPress={() => {setConfigUpdate(true)}} />*/}
         <ScrollView>
         <View style={styles.panelContainer}>
-          {/* <View> */}
             <View style={styles.speakerNameContainer}>
               <Text style={styles.connectedText}>
                 {connected ? 'Connected' : 'Not connected'}
@@ -185,13 +185,24 @@ export const Home = ({route, navigation}) => {
           />
         </View>
 
-          {configs}
-          <AddConfigItem
+          <View style={styles.configContainer}>
+            <View style={styles.configHeader}>
+              <Text style={styles.configTitle}>Configuration</Text>
+              {/* <TouchableOpacity
+                // onPress={}
+              > */}
+              <AddConfigItem/>
+                {/* <AddConfig /> */}
+              {/* </TouchableOpacity> */}
+            </View>
+            {configs}
+          </View>
+          {/* <AddConfigItem
             update={setConfigUpdate}
             title={'CONFIG NAME'}
             volume={volume}
             noiseCanceling={noiseCanceling}
-          />
+          /> */}
         </ScrollView>
         {/* <Jauge percentage={noiseCanceling} /> */}
         {/* <View style={{height: 20}} /> */}
@@ -250,5 +261,22 @@ const styles = {
     fontFamily: 'Cubano',
     fontWeight: '200',
     fontSize: 25,
+  },
+  configContainer: {
+    padding: 20,
+    margin: 20,
+    backgroundColor: '#383A45',
+    borderRadius: 10,
+  },
+  configHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  configTitle: {
+    color: theme.colors.white,
+    fontFamily: theme.fonts.primary.italicBold,
+    fontSize: 25,
+    // marginLeft: 20,
   },
 };
