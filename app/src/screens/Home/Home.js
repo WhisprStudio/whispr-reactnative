@@ -75,7 +75,7 @@ export const Home = ({route, navigation}) => {
         configList.push(
           <ConfigItem
             remove={setConfigUpdate}
-            key={'configItem' + index}
+            index={index}
             title={obj.name}
             volume={obj.volume}
             noiseCanceling={obj.noiseCanceling}
@@ -146,7 +146,6 @@ export const Home = ({route, navigation}) => {
       </View>
 
       <ScrollView style={{}}>
-
         {/*<Button color={theme.colors.yellow} title={"refresh config"} onPress={() => {setConfigUpdate(true)}} />*/}
         <ScrollView>
         <View style={styles.panelContainer}>

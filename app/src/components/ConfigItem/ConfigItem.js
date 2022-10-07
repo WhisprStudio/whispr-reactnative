@@ -8,19 +8,17 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import {theme} from "@theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {storeData} from "@dataStore/UtilsData";
+import { SvgNoiseCancel, SvgPoint, SvgSound } from "../../svg";
 
 export function ConfigItem(props) {
-
     let status = <Text></Text>;
     let label = <Text></Text>;
     const [update, setUpdate] = useState(false);
 
     if (props.status === false) {
         label = <Text style={styles.textConfig}>{props.title}</Text>
-        status = <Text style={styles.statusUnactive}> inactive</Text>
     } else {
         label = <Text style={styles.textConfig && styles.textActive}>{props.title}</Text>
-        status = <Text style={styles.statusActive}> active</Text>
     }
 
 
@@ -40,31 +38,24 @@ export function ConfigItem(props) {
 
     const [editModal, setEditModal] = useState(false);
 
-    return (<GestureRecognizer onSwipeRight={() => setUpdate(!update)}>
-    <View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
-    <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
-    <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-        <View>
-            {label}
-            <View style={{flexDirection: "row", marginLeft: 10}}>
-                <Text style={styles.subtextConfig}>status:</Text>
-                {status}
+    return (
+    <TouchableOpacity key={'configItem' + props?.index}>
+      <View style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: theme.colors.black}}>
+        <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
+        <View style={{padding: 10, flexDirection: "row", borderColor: theme.colors.yellow, borderRadius: 15, borderWidth: 2, justifyContent: 'space-between'}}>
+            <Text style={{fontFamily: theme.fonts.HelvetocaNeue.bold, fontSize: 20, fontWeight: "bold", color: theme.colors.white}}>
+                {label}
+            </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '40%'}}>
+              <SvgSound />
+              <Text style={styles.textValue}>{Math.floor(props.volume || 50)}</Text>
+              <SvgPoint />
+              <SvgNoiseCancel />
+              <Text style={styles.textValue}>{Math.floor(props.noiseCanceling || 50)}</Text>
             </View>
         </View>
-        <View style={{flexDirection: "row"}}>
-        <TouchableOpacity style={{marginRight: 15}} onPress={() => setEditModal(true)}>
-            <EditConfig />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-            AsyncStorage.removeItem(props.title);
-            props.remove(true);
-        }}>
-              <CloseIcon />
-        </TouchableOpacity>
-        </View>
-    </View>
-        <View style={styles.line}></View>
-    </View></GestureRecognizer>);
+      </View>
+    </TouchableOpacity>);
 }
 
 const styles = {
@@ -76,9 +67,16 @@ const styles = {
     },
     textConfig: {
         marginLeft: 10,
-        fontSize: 17,
-        fontFamily: theme.fonts.secondary.semiBold,
-        color: theme.colors.gray,
+        fontSize: 20,
+        fontFamily: theme.fonts.HelvetocaNeue.bold,
+        color: theme.colors.white,
+        fontWeight: 'bold',
+    },
+    textValue: {
+      fontSize: 22,
+      fontFamily: theme.fonts.HelvetocaNeue.italic,
+      color: theme.colors.white,
+      fontWeight: 'bold',
     },
     textActive: {
         marginLeft: 10,

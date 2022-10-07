@@ -14,9 +14,7 @@ export default function AddConfigItem(props) {
     return (<View style={{marginLeft: 20, marginRight: 20, marginTop: 5, marginBottom: 5}}>
     <EditConfigModal update={props.update} editModal={editModal} setEditModal={setEditModal} title={props.title} volume={volume} noiseCanceling={noiseCanceling}/>
     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
-        <View>
-            <Text style={styles.titleAddConfig}>Add Configuration</Text>
-        </View>
+        <View/>
         <View style={{flexDirection: "row"}}>
         <TouchableOpacity onPress={() => setEditModal(true)}>
             <AddConfig />

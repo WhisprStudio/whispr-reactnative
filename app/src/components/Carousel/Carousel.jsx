@@ -35,7 +35,7 @@ const Carousel = ({setShowTutorial}) => {
                         <Image
                             style={style.image}
                             resizeMode={'contain'}
-                            key={index}
+                            key={index + 'image'}
                             source={image}
                         />
                     ))
