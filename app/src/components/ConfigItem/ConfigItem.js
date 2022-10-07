@@ -43,7 +43,7 @@ export function ConfigItem(props) {
       <View style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: theme.colors.black}}>
         <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
         <View style={{padding: 10, flexDirection: "row", borderColor: theme.colors.yellow, borderRadius: 15, borderWidth: 2, justifyContent: 'space-between'}}>
-            <Text style={{fontFamily: theme.fonts.HelvetocaNeue.bold, fontSize: 20, fontWeight: "bold", color: theme.colors.white}}>
+            <Text style={{fontFamily: theme.fonts.primary.normal, fontSize: 20, fontWeight: "bold", color: theme.colors.white}}>
                 {label}
             </Text>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '40%'}}>
@@ -68,13 +68,13 @@ const styles = {
     textConfig: {
         marginLeft: 10,
         fontSize: 20,
-        fontFamily: theme.fonts.HelvetocaNeue.bold,
+        fontFamily: theme.fonts.primary.normal,
         color: theme.colors.white,
         fontWeight: 'bold',
     },
     textValue: {
       fontSize: 22,
-      fontFamily: theme.fonts.HelvetocaNeue.italic,
+      fontFamily: theme.fonts.primary.normal,
       color: theme.colors.white,
       fontWeight: 'bold',
     },
