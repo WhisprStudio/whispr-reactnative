@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ConfigItem } from "../ConfigItem/ConfigItem";
+import {getConfigs} from '@dataStore/UtilsData';
 
 const ConfigList = () => {
   const [configs, setConfigs] = React.useState(null);
