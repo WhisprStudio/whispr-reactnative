@@ -16,6 +16,7 @@ const ConfigList = () => {
           {title: obj.name, volume: obj.volume, noiseCanceling: obj.noiseCanceling}
         );
       };
+      if (key !== 'activeConfig' && key !== 'FAV') fillConfig();
     });
     setConfigs(configList);
   }, []);
