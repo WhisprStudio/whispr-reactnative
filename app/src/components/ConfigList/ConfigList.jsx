@@ -21,7 +21,7 @@ const ConfigList = () => {
 
   return (
     <>
-      {configs.map((value, index) => {
+      {configs && configs.map((value, index) => {
         <ConfigItem 
         index={index}
         title={obj.name}
