@@ -191,7 +191,7 @@ export const Home = ({route, navigation}) => {
               {/* <TouchableOpacity
                 // onPress={}
               > */}
-              <AddConfigItem/>
+              <AddConfigItem update={refreshConfig} />
                 {/* <AddConfig /> */}
               {/* </TouchableOpacity> */}
             </View>
