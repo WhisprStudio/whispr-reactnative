@@ -13,6 +13,7 @@ import StatusLight from '@components/StatusLight/StatusLight';
 import BluetoothSerial from "react-native-bluetooth-serial";
 import AddConfig from "../../../assets/svg/AddConfig.js";
 import Toast from "react-native-toast-message";
+import ConfigList from '../../components/ConfigList/ConfigList';
 
 export const Home = ({route, navigation}) => {
   const {deviceName, isConnected} = route.params;
@@ -70,22 +71,7 @@ export const Home = ({route, navigation}) => {
     // const res = await getFav();
     const keys = await getConfigs();
     configList = [];
-    keys.forEach((key, index) => {
-      const fillConfig = async () => {
-        const obj = await getData(key);
-        configList.push(
-          <ConfigItem
-            remove={setConfigUpdate}
-            index={index}
-            title={obj.name}
-            volume={obj.volume}
-            noiseCanceling={obj.noiseCanceling}
-            status={await isConfigActive(obj)}
-          />,
-        );
-      };
-      if (key !== 'activeConfig' && key !== 'FAV') fillConfig();
-    });
+    
     setTimeout(() => setConfigs(configList), 100);
   };
 
@@ -195,7 +181,7 @@ export const Home = ({route, navigation}) => {
                 {/* <AddConfig /> */}
               {/* </TouchableOpacity> */}
             </View>
-            {configs}
+            <ConfigList />
           </View>
           {/* <AddConfigItem
             update={setConfigUpdate}

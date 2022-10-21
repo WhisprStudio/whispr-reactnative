@@ -11,6 +11,7 @@ import {storeData} from "@dataStore/UtilsData";
 import { SvgNoiseCancel, SvgPoint, SvgSound } from "../../svg";
 
 export function ConfigItem(props) {
+    const { setSelected, selected } = props;
     let status = <Text></Text>;
     let label = <Text></Text>;
     const [update, setUpdate] = useState(false);
@@ -40,13 +41,14 @@ export function ConfigItem(props) {
 
     return (
       <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-        <TouchableOpacity key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: props.index % 2 == 0 ? theme.colors.yellow : null, borderRadius: 15, borderWidth: props.index % 2 == 0 ? 2 : 0, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
+        <TouchableOpacity onPress={() => setSelected(props.title)} key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: selected === props.title ? theme.colors.yellow : null, borderRadius: 15, borderWidth: props.index % 2 == 0 ? 2 : 0, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
           <View style={{}}>
             <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
             <View style={{ alignItems: 'center', flexDirection: "row", justifyContent: 'space-between'}}>
                 <Text style={{fontSize: 20, fontWeight: "bold", color: theme.colors.white}}>
                     {label}
                 </Text>
+                {props[name] &&
                 <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', width: '20%'}}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '70%'}}>
                     <View style={{width: 20, height: 20}}>
@@ -61,6 +63,7 @@ export function ConfigItem(props) {
                     <Text style={styles.textValue}>{Math.floor(props.noiseCanceling || 50)}</Text>
                   </View>
                 </View>
+                } 
             </View>
           </View>
         </TouchableOpacity>
