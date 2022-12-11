@@ -1,0 +1,1 @@
+fichier de config pour cacher vos commits de mort sur le screen
