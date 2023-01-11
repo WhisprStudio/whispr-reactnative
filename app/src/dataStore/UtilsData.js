@@ -25,6 +25,7 @@ export const getConfigs = async () => {
     await AsyncStorage.getAllKeys((error, keys) => {
       keyList = keys;
     });
+    console.log('keyList : ', keyList);
     return keyList;
   } catch (e) {
     // error reading keys

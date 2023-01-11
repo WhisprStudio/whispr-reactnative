@@ -181,7 +181,7 @@ export const Home = ({route, navigation}) => {
                 {/* <AddConfig /> */}
               {/* </TouchableOpacity> */}
             </View>
-            <ConfigList />
+            <ConfigList update={setConfigUpdate}/>
           </View>
           {/* <AddConfigItem
             update={setConfigUpdate}
@@ -191,13 +191,14 @@ export const Home = ({route, navigation}) => {
           /> */}
         </ScrollView>
         {/* <Jauge percentage={noiseCanceling} /> */}
-        {/* <View style={{height: 20}} /> */}
+        <View style={{marginBottom: 30}} >
         <CustomSlider title="Volume" setValue={setVolume} value={volume} />
         <CustomSlider
           title="Noise Canceling"
           setValue={setNoiseCanceling}
           value={noiseCanceling}
         />
+        </View>
       </ScrollView>
       {/* </SafeAreaView> */}
       {/*<Panel navigation={navigation} source={require('../../../assets/portable.png')} noiseCanceling={noiseCanceling} deviceName={deviceName} isConnected={isConnected} />*/}

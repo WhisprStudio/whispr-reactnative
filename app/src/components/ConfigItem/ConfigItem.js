@@ -29,26 +29,23 @@ export function ConfigItem(props) {
         } else {
             AsyncStorage.removeItem("activeConfig")
         }
-        props.remove(true);
     }, [])
 
     useEffect(() => {
         storeData("activeConfig", {name: props.title, noiseCanceling: props.noiseCanceling, volume: props.volume});
-        props.remove(true);
     }, [update])
 
     const [editModal, setEditModal] = useState(false);
 
     return (
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-        <TouchableOpacity onPress={() => setSelected(props.title)} key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: selected === props.title ? theme.colors.yellow : null, borderRadius: 15, borderWidth: props.index % 2 == 0 ? 2 : 0, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-around'}} key={props?.key}>
+        <TouchableOpacity onPress={() => setSelected(props.title)} key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: selected === props.title ? theme.colors.yellow : null, borderRadius: 15, borderWidth: selected === props.title ? 2 : 2, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
           <View style={{}}>
-            <EditConfigModal editModal={editModal} update={props.remove} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
+            <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
             <View style={{ alignItems: 'center', flexDirection: "row", justifyContent: 'space-between'}}>
                 <Text style={{fontSize: 20, fontWeight: "bold", color: theme.colors.white}}>
                     {label}
                 </Text>
-                {props[name] &&
                 <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', width: '20%'}}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '70%'}}>
                     <View style={{width: 20, height: 20}}>
@@ -63,7 +60,6 @@ export function ConfigItem(props) {
                     <Text style={styles.textValue}>{Math.floor(props.noiseCanceling || 50)}</Text>
                   </View>
                 </View>
-                } 
             </View>
           </View>
         </TouchableOpacity>

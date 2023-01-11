@@ -50,7 +50,7 @@ export default function EditConfigModal(props) {
                     <CustomSlider value={volume} title="Volume" setValue={setVolume} />
                     <CustomSlider value={noiseCanceling} title="Noise Canceling" setValue={setNoiseCanceling} />
                 </View>
-                <View style={{flexDirection: "row"}}>
+                <View style={{flexDirection: "row", justifyContent: 'space-around', width: '100%'}}>
                     <Button title={"SAVE"} color={theme.colors.yellow} style={{marginRight: 5}} onPress={() => {
                         props.setEditModal(false);
                         saveConfig();
