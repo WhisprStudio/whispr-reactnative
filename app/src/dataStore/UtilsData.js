@@ -31,3 +31,16 @@ export const getConfigs = async () => {
     // error reading keys
   }
 };
+
+export const getConfigsWithDetails = async () => {
+  const keys = await getConfigs();
+  let configList = [];
+  keys.forEach( async (key, index) => {
+      console.log('La clee en cours est : ', key)
+      const obj = await getConfigsDetails(key);
+      console.log('Apres le await de la clee :', key)
+      configList.push({title: obj.name, volume: obj.volume, noiseCanceling: obj.noiseCanceling})
+  });
+  return configList
+
+}

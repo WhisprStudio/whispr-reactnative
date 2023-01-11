@@ -38,8 +38,8 @@ export function ConfigItem(props) {
     const [editModal, setEditModal] = useState(false);
 
     return (
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}} key={props?.key}>
-        <TouchableOpacity onPress={() => setSelected(props.title)} key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: selected === props.title ? theme.colors.yellow : null, borderRadius: 15, borderWidth: selected === props.title ? 2 : 2, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+        <TouchableOpacity onPress={() => setSelected(props.title)} key={'configItem' + props?.index} style={{width: '85%', backgroundColor: theme.colors.black, borderColor: selected === props.title ? theme.colors.yellow : "transparent", borderRadius: 15, borderWidth: selected === props.title ? 2 : 2, padding: 10, marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5}}>
           <View style={{}}>
             <EditConfigModal editModal={editModal} setEditModal={setEditModal} title={props.title} noiseCanceling={props.noiseCanceling} volume={props.volume}/>
             <View style={{ alignItems: 'center', flexDirection: "row", justifyContent: 'space-between'}}>

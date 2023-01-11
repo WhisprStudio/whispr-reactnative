@@ -3,8 +3,6 @@ import {useEffect, useRef, useState} from 'react';
 import {Text, View, ScrollView, Image, Button, TouchableOpacity, TextInput} from 'react-native';
 import {theme} from '../../theme';
 import CustomSlider from '@components/CustomSlider/CustomSlider';
-import {ConfigItem} from '@components/ConfigItem/ConfigItem.js';
-import AddConfigItem from '@components/AddConfigItem/AddConfigItem.js';
 import {storeData, getData} from '@components/../dataStore/UtilsData.js';
 import Carousel from '@components/Carousel/Carousel';
 import {getConfigs} from '@dataStore/UtilsData';
@@ -13,7 +11,7 @@ import StatusLight from '@components/StatusLight/StatusLight';
 import BluetoothSerial from "react-native-bluetooth-serial";
 import AddConfig from "../../../assets/svg/AddConfig.js";
 import Toast from "react-native-toast-message";
-import ConfigList from '../../components/ConfigList/ConfigList';
+import ConfigsHandler from '@components/Configs/Configs';
 
 export const Home = ({route, navigation}) => {
   const {deviceName, isConnected} = route.params;
@@ -21,7 +19,7 @@ export const Home = ({route, navigation}) => {
   const [configUpdate, setConfigUpdate] = useState(true);
   const [showTutorial, setShowTutorial] = useState(false)
   const [configs, setConfigs] = useState([<View/>]);
-  let configList = [];
+  // let configList = [];
   const [volume, setVolume] = useState(20);
   const [noiseCanceling, setNoiseCanceling] = useState(20);
   const [fav, setFav] = useState('');
@@ -39,7 +37,7 @@ export const Home = ({route, navigation}) => {
 
   useEffect(() => {
     if (configUpdate) {
-      refreshConfig();
+      // refreshConfig();
       setConfigUpdate(false);
     }
   }, [configUpdate]);
@@ -65,14 +63,6 @@ export const Home = ({route, navigation}) => {
       return true;
     }
     return false;
-  };
-
-  const refreshConfig = async () => {
-    // const res = await getFav();
-    const keys = await getConfigs();
-    configList = [];
-    
-    setTimeout(() => setConfigs(configList), 100);
   };
 
   const addFav = () => {
@@ -171,18 +161,9 @@ export const Home = ({route, navigation}) => {
           />
         </View>
 
-          <View style={styles.configContainer}>
-            <View style={styles.configHeader}>
-              <Text style={styles.configTitle}>Configuration</Text>
-              {/* <TouchableOpacity
-                // onPress={}
-              > */}
-              <AddConfigItem update={refreshConfig} />
-                {/* <AddConfig /> */}
-              {/* </TouchableOpacity> */}
-            </View>
-            <ConfigList update={setConfigUpdate}/>
-          </View>
+              {/* AJOUTER CONFIGSHANDLER ICI */}
+              <ConfigsHandler />
+
           {/* <AddConfigItem
             update={setConfigUpdate}
             title={'CONFIG NAME'}
