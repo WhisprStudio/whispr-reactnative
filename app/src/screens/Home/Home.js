@@ -12,6 +12,7 @@ import BluetoothSerial from "react-native-bluetooth-serial";
 import AddConfig from "../../../assets/svg/AddConfig.js";
 import Toast from "react-native-toast-message";
 import ConfigsHandler from '@components/Configs/Configs';
+import RecordScreen from '../Audio';
 
 export const Home = ({route, navigation}) => {
   const {deviceName, isConnected} = route.params;
@@ -162,8 +163,8 @@ export const Home = ({route, navigation}) => {
         </View>
 
               {/* AJOUTER CONFIGSHANDLER ICI */}
-              <ConfigsHandler />
-
+              {/* <ConfigsHandler /> */}
+              <RecordScreen />
           {/* <AddConfigItem
             update={setConfigUpdate}
             title={'CONFIG NAME'}
